@@ -43,7 +43,6 @@
 <body>
   <div class="overlay"></div> <!-- Overlay for better text visibility -->
  
-
   <div class="input-container"> <!-- Added a container for the input fields -->
     <h1>Private Journal</h1>
     <div id="pinEntry" class="centered">
@@ -54,7 +53,7 @@
       <label for="setPin">Set New PIN:</label>
       <input type="password" id="setPin">
       <button onclick="setPIN()">Set PIN</button>
-        </div>
+      </div>
       <!-- Move the file input (Browse button) above the Change Background button -->
       <input type="file" id="backgroundImageUpload" accept="image/*">
       <button id="changeBackground" onclick="changeBackground()" class="change-bg">Change Background Image</button>
@@ -79,7 +78,7 @@
           localStorage.setItem('backgroundImage', imageUrl); // Store the image URL in localStorage
         };
         reader.readAsDataURL(file); // Read the file as a Data URL
-    } else {
+      } else {
         alert("Please select an image file.");
       }
     }
@@ -96,32 +95,32 @@
     window.onload = setBackgroundFromStorage;
 
     function validatePIN() {
-      const enteredPin = document.getElementById('enterPin').value;
-      const correctPin = "1234"; // Replace with your actual PIN logic
+        const enteredPin = document.getElementById('enterPin').value;
+        const correctPin = "1234"; // Replace with your actual PIN logic
 
-      if (enteredPin === correctPin) {
-        document.getElementById('pinEntry').style.display = 'none';
-        document.getElementById('accessJournal').style.display = 'block';
-      } else {
-        alert("Incorrect PIN. Please try again.");
-      }
+        if (enteredPin === correctPin) {
+            // Redirect to Journal.html
+            window.location.href = 'Journal.html'; // Change this to the path of your Journal.html
+        } else {
+            alert("Incorrect PIN. Please try again.");
+        }
     }
 
     function setPIN() {
-      const newPin = document.getElementById('setPin').value;
-      // Here you would typically save the new PIN securely
-      // For demonstration, we'll just alert the user
-      if (newPin) {
-        alert("New PIN set successfully!"); // Notify the user
-        document.getElementById('setPin').value = ''; // Clear the input field
-      } else {
-        alert("Please enter a new PIN.");
-      }
+        const newPin = document.getElementById('setPin').value;
+        // Here you would typically save the new PIN securely
+        // For demonstration, we'll just alert the user
+        if (newPin) {
+            alert("New PIN set successfully!"); // Notify the user
+            document.getElementById('setPin').value = ''; // Clear the input field
+        } else {
+            alert("Please enter a new PIN.");
+        }
     }
 
     function openJournal() {
-      // Logic to open the journal goes here
-      alert("Opening the journal..."); // Placeholder for actual logic
+        // Logic to open the journal goes here
+        alert("Opening the journal..."); // Placeholder for actual logic
     }
   </script>
 </body>
