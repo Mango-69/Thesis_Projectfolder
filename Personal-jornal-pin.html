@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private Journal - PIN</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <h1>Private Journal</h1>
+
+  <div class="input-container"> <!-- Added a container for the input fields -->
+    <div id="pinEntry" class="centered">
+      <label for="enterPin">Enter PIN:</label>
+      <input type="password" id="enterPin">
+      <button onclick="validatePIN()">Submit</button>
+
+      <label for="setPin">Set New PIN:</label>
+      <input type="password" id="setPin">
+      <button onclick="setPIN()">Set PIN</button>
+    </div>
+
+    <div id="accessJournal" style="display: none;" class="centered">
+      <button onclick="openJournal()">Access Journal</button>
+    </div>
+
+    <input type="file" id="backgroundImageUpload" accept="image/*">
+    <button id="changeBackground" onclick="changeBackground()" class="change-bg">Change Background Image</button>
+  </div>
+
+  <script>
+    function changeBackground() {
+      const fileInput = document.getElementById('backgroundImageUpload');
+      const file = fileInput.files[0]; // Get the first file
+
+      if (file) {
+        const reader = new FileReader(); // Create a FileReader object
+        reader.onload = function(e) {
+          document.body.style.backgroundImage = `url('${e.target.result}')`; // Set the background image
+          document.body.style.backgroundSize = "cover"; // Cover the entire body
+        };
+        reader.readAsDataURL(file); // Read the file as a Data URL
+      } else {
+        alert("Please select an image file.");
+      }
+    }
+  </script>
+</body>
+</html>
