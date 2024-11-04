@@ -5,6 +5,7 @@
 /* html is set to 62.5% so that all the REM measurements are based on 10px sizing. So basically 1.5rem = 15px */
 html {
   font-size: 62.5%;
+
 }
 
 body {
@@ -84,13 +85,9 @@ blockquote p:last-child {
  */
 
 /* Full size background image */
-html, #container, .inner { 
-  background-color: transparent; 
-}
-
+html, #container, .inner { background-color: transparent;}
 html {
-  background: url(images/Background.gif) 
-  center center no-repeat fixed;
+  background: url(images/Background.gif) center center no-repeat fixed;
   background-size: cover;
 }
 
