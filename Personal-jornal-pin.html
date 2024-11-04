@@ -5,12 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Private Journal - PIN</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
-  <script src="script.js" defer></script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      transition: background-color 0.5s, color 0.5s; /* Smooth transition for background and text color */
+      color: white; /* Default text color */
+      position: relative; /* For overlay positioning */
+      background-size: cover; /* Ensure background covers the entire body */
+    }
+
+    h1 {
+      transition: color 0.5s; /* Smooth transition for heading color */
+    }
+
+    .input-container {
+      text-align: center;
+      position: relative; /* For overlay positioning */
+      z-index: 1; /* Ensure input container is above the overlay */
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+      z-index: 0; /* Ensure overlay is below the input container */
+    }
+  </style>
 </head>
 <body>
-  <h1>Private Journal</h1>
+  <div class="overlay"></div> <!-- Overlay for better text visibility -->
+ 
 
   <div class="input-container"> <!-- Added a container for the input fields -->
+    <h1>Private Journal</h1>
     <div id="pinEntry" class="centered">
       <label for="enterPin">Enter PIN:</label>
       <input type="password" id="enterPin">
@@ -19,17 +54,19 @@
       <label for="setPin">Set New PIN:</label>
       <input type="password" id="setPin">
       <button onclick="setPIN()">Set PIN</button>
+        </div>
+      <!-- Move the file input (Browse button) above the Change Background button -->
+      <input type="file" id="backgroundImageUpload" accept="image/*">
+      <button id="changeBackground" onclick="changeBackground()" class="change-bg">Change Background Image</button>
     </div>
 
     <div id="accessJournal" style="display: none;" class="centered">
       <button onclick="openJournal()">Access Journal</button>
     </div>
-
-    <input type="file" id="backgroundImageUpload" accept="image/*">
-    <button id="changeBackground" onclick="changeBackground()" class="change-bg">Change Background Image</button>
   </div>
 
   <script>
+    // Function to change the background image
     function changeBackground() {
       const fileInput = document.getElementById('backgroundImageUpload');
       const file = fileInput.files[0]; // Get the first file
@@ -37,13 +74,54 @@
       if (file) {
         const reader = new FileReader(); // Create a FileReader object
         reader.onload = function(e) {
-          document.body.style.backgroundImage = `url('${e.target.result}')`; // Set the background image
-          document.body.style.backgroundSize = "cover"; // Cover the entire body
+          const imageUrl = e.target.result; // Get the image URL
+          document.body.style.backgroundImage = `url('${imageUrl}')`; // Set the background image
+          localStorage.setItem('backgroundImage', imageUrl); // Store the image URL in localStorage
         };
         reader.readAsDataURL(file); // Read the file as a Data URL
-      } else {
+    } else {
         alert("Please select an image file.");
       }
+    }
+
+    // Function to set the background image from localStorage on page load
+    function setBackgroundFromStorage() {
+      const storedImage = localStorage.getItem('backgroundImage'); // Retrieve the image URL from localStorage
+      if (storedImage) {
+        document.body.style.backgroundImage = `url('${storedImage}')`; // Set the background image
+      }
+    }
+
+    // Call the function to set the background image when the page loads
+    window.onload = setBackgroundFromStorage;
+
+    function validatePIN() {
+      const enteredPin = document.getElementById('enterPin').value;
+      const correctPin = "1234"; // Replace with your actual PIN logic
+
+      if (enteredPin === correctPin) {
+        document.getElementById('pinEntry').style.display = 'none';
+        document.getElementById('accessJournal').style.display = 'block';
+      } else {
+        alert("Incorrect PIN. Please try again.");
+      }
+    }
+
+    function setPIN() {
+      const newPin = document.getElementById('setPin').value;
+      // Here you would typically save the new PIN securely
+      // For demonstration, we'll just alert the user
+      if (newPin) {
+        alert("New PIN set successfully!"); // Notify the user
+        document.getElementById('setPin').value = ''; // Clear the input field
+      } else {
+        alert("Please enter a new PIN.");
+      }
+    }
+
+    function openJournal() {
+      // Logic to open the journal goes here
+      alert("Opening the journal..."); // Placeholder for actual logic
     }
   </script>
 </body>

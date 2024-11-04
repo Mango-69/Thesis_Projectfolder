@@ -9,15 +9,16 @@ body {
     background-color: #f5f5dc; /* Light beige background */
     color: #333; /* Dark text color for contrast */
     font-family: 'Georgia', serif; /* Elegant serif font */
-    background-image: url('Light Academia.jpg'); /* Default background image */
+    background-image: url(''); /* Default background image */
     background-size: cover; /* Cover the entire body */
     background-position: center; /* Center the background image */
     background-repeat: no-repeat; /* Prevent the background from repeating */
   }
   
+
   /* Styles for the input container */
   .input-container {
-    background-color: rgba(255, 255, 255, 0.8); /* Light semi-transparent background */
+    background-color: rgba(255, 255, 255, 0.637); /* Light semi-transparent background */
     padding: 20px; /* Add padding inside the box */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
@@ -27,7 +28,7 @@ body {
 
   .container {
     filter: brightness(0.5); /* Darken the background */
-    
+
 }
 
   /* Centered class for centering elements */
@@ -41,19 +42,19 @@ body {
   /* Styles for the change background button */
   .change-bg {
     position: absolute; /* Position it relative to the nearest positioned ancestor */
-    bottom: 20px; /* 20px from the bottom */
+    bottom: 30px; /* 20px from the bottom */
     right: 20px; /* 20px from the right */
     padding: 10px 20px; /* Add padding for better click area */
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-    border: 1px solid #ccc; /* Light border */
+    background-color: rgba(255, 255, 255, 0); /* Semi-transparent white background */
+    border: 2px solid #351f1f; /* Light border */
     border-radius: 5px; /* Rounded corners */
     cursor: pointer; /* Change cursor to pointer on hover */
-    font-size: 16px; /* Increase font size for better readability */
+    font-size: 12px; /* Increase font size for better readability */
   }
   
   /* Button styles for the PIN submission and setting */
   button {
-    margin: 5px; /* Add some space between buttons */
+    margin: 29px; /* Add some space between buttons */
     padding: 10px 15px; /* Add padding for better click area */
     background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background for buttons */
     border: 1px solid #ccc; /* Light border */
