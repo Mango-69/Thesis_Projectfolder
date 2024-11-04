@@ -85,16 +85,23 @@ blockquote p:last-child {
  */
 
 /* Full size background image */
-html, #container, .inner { background-color: transparent;}
 html {
-  background: url(images/Background.gif) center center no-repeat fixed;
-  background-size: cover;
+  height: 100%;
 }
 
 body {
+  height: 100%;
+  margin: 0;
+  background-image: url('../images/Train.gif');
   max-width: 800px;
   margin: 25px auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646; /* Fallback color if image is unavailable */
 }
+
 
 header, #content, footer { 
   background: rgba(0, 0, 0, .8); 
