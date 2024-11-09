@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="css/Student-landing-page.css">
+    <link rel="stylesheet" href="css/Landing-page-shared-script.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Basic styles for light and dark themes */
@@ -125,28 +125,28 @@
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
        
-        <a href="Student-landing-page.html">
+        <a href="Student-landing-page.html" onclick="stayOpen()">
             <i class="fa-solid fa-house-user" style="margin-right: 10px;"></i> Home
         </a>
-        <a href="#">
+        <a href="Profile.html" onclick="stayOpen()">
             <i class="fa-solid fa-user" style="margin-right: 10px;"></i> Profile
         </a>
-        <a href="#">
+        <a href="#" onclick="stayOpen()">
             <i class="fa-solid fa-inbox" style="margin-right: 10px;"></i> Messages
         </a>
-        <a href="#">
+        <a href="Student-community-page.html" onclick="stayOpen()">
             <i class="fa-solid fa-user-group" style="margin-right: 10px;"></i> Community
         </a>
-        <a href="#">
+        <a href="#" onclick="stayOpen()">
             <i class="fa-regular fa-bell" style="margin-right: 10px;"></i> Notification
         </a>
-        <a href="#">
+        <a href="Personal-journal-pin.html" onclick="stayOpen()">
             <i class="fa-solid fa-book" style="margin-right: 10px;"></i> Personal Journal
         </a>
-        <a href="#">
+        <a href="#" onclick="stayOpen()">
             <i class="fa-solid fa-comments" style="margin-right: 10px;"></i> Connect with Therapist
         </a>
-
+    
         <!-- Theme toggle switch -->
         <div class="theme-switch-wrapper">
             <label class="theme-switch" for="checkbox">
@@ -154,6 +154,9 @@
                 <div class="slider round"></div>
             </label>
             <span style="color: #818181; margin-left: 10px;">Toggle Theme</span>
+            <a href="Main-page.html">
+                <button><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </a>
         </div>
     </div>
 
@@ -166,10 +169,16 @@
     <script>
         function openNav() {
             document.getElementById("mySidebar").style.left = "0";
+            localStorage.setItem('sidebarOpen', 'true'); // Save state to localStorage
         }
 
         function closeNav() {
             document.getElementById("mySidebar").style.left = "-250px";
+            localStorage.setItem('sidebarOpen', 'false'); // Save state to localStorage
+        }
+
+        function stayOpen() {
+            // Do nothing, just prevent the sidebar from closing
         }
 
         function toggleTheme() {
@@ -190,6 +199,14 @@
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
         document.getElementById('checkbox').checked = savedTheme === 'dark'; // Set the toggle state
+
+        // Check sidebar state on page load
+        const sidebarState = localStorage.getItem('sidebarOpen');
+        if (sidebarState === 'true') {
+            openNav(); // Open sidebar if state is true
+        } else {
+            closeNav(); // Close sidebar if state is false
+        }
     </script>
 </body>
 </html>
