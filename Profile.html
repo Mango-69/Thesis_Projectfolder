@@ -1,1 +1,151 @@
-Do this next
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .profile-header img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+
+        .profile-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .profile-header p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .action-buttons {
+            margin-top: 20px;
+        }
+
+        .action-buttons button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .action-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        .bio {
+            margin-top: 20px;
+        }
+
+        .bio h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .bio p {
+            color: #333;
+        }
+
+        .posts {
+            margin-top: 30px;
+        }
+
+        .post {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+
+        .post h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .post p {
+            color: #555;
+        }
+
+        .post .timestamp {
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <img src="https://via.placeholder.com/100" alt="Profile Picture">
+            <div>
+                <h1>John Doe</h1>
+                <p>@johndoe</p>
+                <p>Location: New York, USA</p>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button><i class="fas fa-user-edit"></i> Edit Profile</button>
+            <a href="Main-page.html">
+                <button><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </a>
+        </div>
+
+        <div class="bio">
+            <h2>About Me</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. Sed sit amet accumsan arcu. Praesent ultrices, nisi a tincidunt tincidunt, nisi nisl aliquet nisi, eget tincidunt nisl nisi eget nisi.</p>
+        </div>
+
+        <div class="posts">
+            <h2>Posts</h2>
+            <div class="post">
+                <h3>My First Post</h3>
+                <p>This is the content of my first post. I'm excited to share my thoughts and experiences!</p>
+                <div class="timestamp">Posted on: January 1, 2023</div>
+            </div>
+            <div class="post">
+                <h3>Another Day, Another Adventure</h3>
+                <p>Today I went hiking in the mountains. The views were breathtaking!</p>
+                <div class="timestamp">Posted on: February 15, 2023</div>
+            </div>
+            <div class="post">
+                <h3>Learning New Skills</h3>
+                <p>I've started learning web development, and it's been an amazing journey so far. Can't wait to build my first project!</p>
+                <div class="timestamp">Posted on: March 10, 2023</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
