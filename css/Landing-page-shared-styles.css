@@ -62,4 +62,43 @@
     .sidebar a {font-size: 18px;}
   } 
 
-  
+  .theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input {
+    display: none; /* Hide the checkbox */
+}
+
+.slider {
+    background-color: #ccc; /* Default background color */
+    border-radius: 34px; /* Rounded corners */
+    cursor: pointer;
+    height: 34px; /* Match the height of the switch */
+    position: absolute;
+    width: 100%; /* Full width */
+    transition: .4s; /* Smooth transition */
+}
+
+.slider:before {
+    background-color: #fff; /* Knob color */
+    border-radius: 50%; /* Make the knob round */
+    content: "";
+    height: 26px; /* Knob height */
+    left: 4px; /* Position from the left */
+    position: absolute;
+    transition: .4s; /* Smooth transition */
+    width: 26px; /* Knob width */
+    top: 4px; /* Center the knob vertically */
+}
+
+input:checked + .slider {
+    background-color: #66bb6a; /* Background color when checked */
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px); /* Move the knob to the right */
+}

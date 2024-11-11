@@ -12,11 +12,11 @@
             font-family: Arial, sans-serif;
             transition: background-color 0.3s, color 0.3s;
             background-color: #ffffff; /* Light mode background */
-            color: #000000; /* Light mode text color */
+            color: #414146; /* Light mode text color */
         }
 
         [data-theme="dark"] {
-            background-color: #000000; /* Dark mode background */
+            background-color: #0a091d; /* Dark mode background */
             color: #ffffff; /* Dark mode text color */
         }
 
@@ -119,94 +119,144 @@
         .slider.round:before {
             border-radius: 50%;
         }
+
+        /* Notifications styles */
+        #notifications {
+            display: none; /* Initially hidden */
+            margin-top: 20px; /* Add some space above */
+        }
     </style>
 </head>
 <body>
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-       
-        <a href="Student-landing-page.html" onclick="stayOpen()">
-            <i class="fa-solid fa-house-user" style="margin-right: 10px;"></i> Home
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+   
+    <a href="Student-landing-page.html" onclick="stayOpen()">
+        <i class="fa-solid fa-house-user" style="margin-right: 10px;"></i> Home
+    </a>
+    <a href="Profile.html" onclick="stayOpen()">
+        <i class="fa-solid fa-user" style="margin-right: 10px;"></i> Profile
+    </a>
+    <a href="#" onclick="stayOpen()">
+        <i class="fa-solid fa-inbox" style="margin-right: 10px;"></i> Messages
+    </a>
+    <a href="Student-community-page.html" onclick="stayOpen()">
+        <i class="fa-solid fa-user-group" style="margin-right: 10px;"></i> Community
+    </a>
+    <a href="Notifications.html" onclick="stayOpen()">
+        <i class="fa-regular fa-bell" style="margin-right: 10px;"></i> Notification
+    </a>
+    <a href="Personal-journal-pin.html" onclick="stayOpen()">
+        <i class="fa-solid fa-book" style="margin-right: 10px;"></i> Personal Journal
+    </a>
+    <a href="#" onclick="stayOpen()">
+        <i class="fa-solid fa-comments" style="margin-right: 10px;"></i> Connect with Therapist
+    </a>
+
+    <!-- Theme toggle switch -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" onchange="toggleTheme()">
+            <div class="slider round"></div>
+        </label>
+        <span style="color: #818181; margin-left: 10px;">Toggle Theme</span>
+        <a href="Main-page.html">
+            <button><i class="fas fa-sign-out-alt"></i> Logout</button>
         </a>
-        <a href="Profile.html" onclick="stayOpen()">
-            <i class="fa-solid fa-user" style="margin-right: 10px;"></i> Profile
-        </a>
-        <a href="#" onclick="stayOpen()">
-            <i class="fa-solid fa-inbox" style="margin-right: 10px;"></i> Messages
-        </a>
-        <a href="Student-community-page.html" onclick="stayOpen()">
-            <i class="fa-solid fa-user-group" style="margin-right: 10px;"></i> Community
-        </a>
-        <a href="#" onclick="stayOpen()">
-            <i class="fa-regular fa-bell" style="margin-right: 10px;"></i> Notification
-        </a>
-        <a href="Personal-journal-pin.html" onclick="stayOpen()">
-            <i class="fa-solid fa-book" style="margin-right: 10px;"></i> Personal Journal
-        </a>
-        <a href="#" onclick="stayOpen()">
-            <i class="fa-solid fa-comments" style="margin-right: 10px;"></i> Connect with Therapist
-        </a>
-    
-        <!-- Theme toggle switch -->
-        <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox" onchange="toggleTheme()">
-                <div class="slider round"></div>
-            </label>
-            <span style="color: #818181; margin-left: 10px;">Toggle Theme</span>
-            <a href="Main-page.html">
-                <button><i class="fas fa-sign-out-alt"></i> Logout</button>
-            </a>
-        </div>
     </div>
+</div>
 
-    <div id="main">
-        <button class="openbtn" onclick="openNav()">&#9776; </button>
-        <h2>Home</h2>
-        <p>Content...</p>
+<div id="main">
+    <button class="openbtn" onclick="openNav()">&#9776; </button>
+    <h2>Community</h2>
+    <p>Content...</p>
+
+    <!-- Notifications Section -->
+    <div id="notifications">
+        <h3>Notifications</h3>
+        <ul id="notificationList"></ul>
     </div>
+</div>
 
-    <script>
-        function openNav() {
-            document.getElementById("mySidebar").style.left = "0";
-            localStorage.setItem('sidebarOpen', 'true'); // Save state to localStorage
-        }
+<script>
+    function openNav() {
+        document.getElementById("mySidebar").style.left = "0";
+    }
 
-        function closeNav() {
-            document.getElementById("mySidebar").style.left = "-250px";
-            localStorage.setItem('sidebarOpen', 'false'); // Save state to localStorage
-        }
+    function closeNav() {
+        document.getElementById("mySidebar").style.left = "-250px";
+    }
 
-        function stayOpen() {
-            // Do nothing, just prevent the sidebar from closing
-        }
+    function stayOpen() {
+        // Do nothing, just prevent the sidebar from closing
+    }
 
-        function toggleTheme() {
-            const checkbox = document.getElementById('checkbox');
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                checkbox.checked = false; // Uncheck the toggle
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                checkbox.checked = true; // Check the toggle
-            }
-        }
-
-        // On page load, check for saved theme preference
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        document.getElementById('checkbox').checked = savedTheme === 'dark'; // Set the toggle state
-
-        // Check sidebar state on page load
-        const sidebarState = localStorage.getItem('sidebarOpen');
-        if (sidebarState === 'true') {
-            openNav(); // Open sidebar if state is true
+    function toggleTheme() {
+        const checkbox = document.getElementById('checkbox');
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+            checkbox.checked = false; // Uncheck the toggle
         } else {
-            closeNav(); // Close sidebar if state is false
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            checkbox.checked = true; // Check the toggle
         }
-    </script>
+    }
+
+    // On page load, check for saved theme preference
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('checkbox').checked = savedTheme === 'dark'; // Set the toggle state
+
+    // Notifications functionality
+    const notifications = [];
+
+    // Simulate fetching notifications
+    function fetchNotifications() {
+        // Simulated messages
+        const messages = [
+            "Y",
+            ""
+        ];
+
+        // Simulated posts
+        const posts = [
+            "",
+            ""
+        ];
+
+        // Combine messages and posts into notifications
+        notifications.length = 0; // Clear previous notifications
+        notifications.push(...messages, ...posts);
+    }
+
+    // Function to show notifications
+    function showNotifications() {
+        fetchNotifications(); // Fetch notifications when showing them
+        const notificationList = document.getElementById('notificationList');
+        notificationList.innerHTML = ''; // Clear previous notifications
+
+        if (notifications.length === 0) {
+            notificationList.innerHTML = '<li>No new notifications.</li>';
+        } else {
+            notifications.forEach(notification => {
+                const li = document.createElement('li');
+                li.textContent = notification;
+                notificationList.appendChild(li);
+            });
+        }
+
+        // Show the notifications section
+        document.getElementById('notifications').style.display = 'block';
+    }
+
+    // Attach the showNotifications function to the notification link
+    document.querySelector('.sidebar a:nth-child(5)').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default link behavior
+        showNotifications(); // Call the function to show notifications
+    });
+</script>
 </body>
 </html>
