@@ -1,262 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community</title>
-    <link rel="stylesheet" href="css/Landing-page-shared-script.js">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Basic styles for light and dark themes */
-        body {
-            font-family: Arial, sans-serif;
-            transition: background-color 0.3s, color 0.3s;
-            background-color: #ffffff; /* Light mode background */
-            color: #414146; /* Light mode text color */
-        }
-
-        [data-theme="dark"] {
-            background-color: #0a091d; /* Dark mode background */
-            color: #ffffff; /* Dark mode text color */
-        }
-
-        /* Sidebar styles */
-        .sidebar {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: -250px; /* Initially hidden */
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 20px;
-        }
-
-        .sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: flex; /* Use flexbox for alignment */
-            align-items: center; /* Center items vertically */
-            transition: 0.3s;
-        }
-
-        .sidebar a:hover {
-            color: #f1f1f1;
-        }
-
-        .closebtn {
-            font-size: 36px;
-            margin-left: 15px;
-        }
-
-        .openbtn {
-            font-size: 20px;
-            cursor: pointer;
-            background-color: #111;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-        }
-
-        /* Toggle Switch Styles */
-        .theme-switch-wrapper {
-            position: absolute;
-            bottom: 20px; /* Position at the bottom */
-            left: 15px;
-            display: flex;
-            align-items: center;
-        }
-
-        .theme-switch {
-            display: inline-block;
-            height: 34px;
-            position: relative;
-            width: 60px;
-        }
-
-        .theme-switch input {
-            display: none;
-        }
-
-        .slider {
-            background-color: #ccc;
-            bottom: 0;
-            cursor: pointer;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-            transition: .4s;
-        }
-
-        .slider:before {
-            background-color: #fff;
-            bottom: 4px;
-            content: "";
-            height: 26px;
-            left: 4px;
-            position: absolute;
-            transition: .4s;
-            width: 26px;
-        }
-
-        input:checked + .slider {
-            background-color: #66bb6a; /* Green background when checked */
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(26px); /* Move the knob to the right */
-        }
-
-        .slider.round {
-            border-radius: 34px;
-        }
-
-        .slider.round:before {
-            border-radius: 50%;
-        }
-
-        /* Notifications styles */
-        #notifications {
-            display: none; /* Initially hidden */
-            margin-top: 20px; /* Add some space above */
-        }
-    </style>
-</head>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
-<div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-   
-    <a href="Student-landing-page.html" onclick="stayOpen()">
-        <i class="fa-solid fa-house-user" style="margin-right: 10px;"></i> Home
-    </a>
-    <a href="Profile.html" onclick="stayOpen()">
-        <i class="fa-solid fa-user" style="margin-right: 10px;"></i> Profile
-    </a>
-    <a href="#" onclick="stayOpen()">
-        <i class="fa-solid fa-inbox" style="margin-right: 10px;"></i> Messages
-    </a>
-    <a href="Student-community-page.html" onclick="stayOpen()">
-        <i class="fa-solid fa-user-group" style="margin-right: 10px;"></i> Community
-    </a>
-    <a href="Notifications.html" onclick="stayOpen()">
-        <i class="fa-regular fa-bell" style="margin-right: 10px;"></i> Notification
-    </a>
-    <a href="Personal-journal-pin.html" onclick="stayOpen()">
-        <i class="fa-solid fa-book" style="margin-right: 10px;"></i> Personal Journal
-    </a>
-    <a href="#" onclick="stayOpen()">
-        <i class="fa-solid fa-comments" style="margin-right: 10px;"></i> Connect with Therapist
-    </a>
 
-    <!-- Theme toggle switch -->
-    <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" onchange="toggleTheme()">
-            <div class="slider round"></div>
-        </label>
-        <span style="color: #818181; margin-left: 10px;">Toggle Theme</span>
-        <a href="Main-page.html">
-            <button><i class="fas fa-sign-out-alt"></i> Logout</button>
-        </a>
-    </div>
+<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+  <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+  <a href="#" class="w3-bar-item w3-button">Link 1</a>
+  <a href="#" class="w3-bar-item w3-button">Link 2</a>
+  <a href="#" class="w3-bar-item w3-button">Link 3</a>
 </div>
 
-<div id="main">
-    <button class="openbtn" onclick="openNav()">&#9776; </button>
-    <h2>Community</h2>
-    <p>Content...</p>
+<!-- Page Content -->
+<div class="w3-teal">
+  <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+  <div class="w3-container">
+    <h1>My Page</h1>
+  </div>
+</div>
 
-    <!-- Notifications Section -->
-    <div id="notifications">
-        <h3>Notifications</h3>
-        <ul id="notificationList"></ul>
-    </div>
+<img src="img_car.jpg" alt="Car" style="width:100%">
+
+<div class="w3-container">
+<p>This sidebar is hidden by default, (style="display:none")</p>
+<p>You must click on the "hamburger" icon (top left) to open it.</p>
+<p>The sidebar will hide a part of the page content.</p>
 </div>
 
 <script>
-    function openNav() {
-        document.getElementById("mySidebar").style.left = "0";
-    }
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
 
-    function closeNav() {
-        document.getElementById("mySidebar").style.left = "-250px";
-    }
-
-    function stayOpen() {
-        // Do nothing, just prevent the sidebar from closing
-    }
-
-    function toggleTheme() {
-        const checkbox = document.getElementById('checkbox');
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        if (currentTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-            checkbox.checked = false; // Uncheck the toggle
-        } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            checkbox.checked = true; // Check the toggle
-        }
-    }
-
-    // On page load, check for saved theme preference
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    document.getElementById('checkbox').checked = savedTheme === 'dark'; // Set the toggle state
-
-    // Notifications functionality
-    const notifications = [];
-
-    // Simulate fetching notifications
-    function fetchNotifications() {
-        // Simulated messages
-        const messages = [
-            "Y",
-            ""
-        ];
-
-        // Simulated posts
-        const posts = [
-            "",
-            ""
-        ];
-
-        // Combine messages and posts into notifications
-        notifications.length = 0; // Clear previous notifications
-        notifications.push(...messages, ...posts);
-    }
-
-    // Function to show notifications
-    function showNotifications() {
-        fetchNotifications(); // Fetch notifications when showing them
-        const notificationList = document.getElementById('notificationList');
-        notificationList.innerHTML = ''; // Clear previous notifications
-
-        if (notifications.length === 0) {
-            notificationList.innerHTML = '<li>No new notifications.</li>';
-        } else {
-            notifications.forEach(notification => {
-                const li = document.createElement('li');
-                li.textContent = notification;
-                notificationList.appendChild(li);
-            });
-        }
-
-        // Show the notifications section
-        document.getElementById('notifications').style.display = 'block';
-    }
-
-    // Attach the showNotifications function to the notification link
-    document.querySelector('.sidebar a:nth-child(5)').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default link behavior
-        showNotifications(); // Call the function to show notifications
-    });
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
 </script>
+     
 </body>
-</html>
+</html> 

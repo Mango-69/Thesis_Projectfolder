@@ -36,7 +36,14 @@
     margin-left: 50px;
   }
   
-  /* The button used to open the sidebar */
+  #main {
+    margin-left: 250px; 
+
+    padding: 20px; 
+  
+    transition: margin-left 0.5s; 
+  }
+
   .openbtn {
     font-size: 20px;
     cursor: pointer;
@@ -44,6 +51,7 @@
     color: white;
     padding: 10px 15px;
     border: none;
+    margin-bottom: 20px;
   }
   
   .openbtn:hover {

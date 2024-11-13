@@ -34,9 +34,28 @@
             padding: 10px;
             border-bottom: 1px solid #ccc;
         }
+
+        /* Back button styles */
+        .back-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Remove underline from link */
+            display: inline-block; /* Center the button */
+            margin: 20px 0; /* Add margin for spacing */
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
+    <a href="Student-landing-page.html" class="back-button">Home</a>
+
     <div id="notifications">
         <h3>Notifications</h3>
         <ul id="notificationList"></ul>

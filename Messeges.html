@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages</title>
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8; /* Light background for contrast */
+    }
+    .sidebar {
+      background-color: #ffe5b4; /* Peach color for sidebar */
+      width: 300px;
+      height: 100vh;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    .sidebar__content {
+      padding: 16px;
+    }
+    .back-button {
+      background-color: #ffcc80; /* Light peach color for button */
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 10px; /* Space below the button */
+      width: 100%; /* Full width */
+      text-align: center; /* Center text */
+    }
+    .sidebar__content h2 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+    .sidebar__content ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .sidebar__content li {
+      padding: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .sidebar__content li:hover {
+      background-color: #ffd699; /* A slightly darker peach on hover */
+    }
+    .chat-container {
+      margin-left: 320px; /* Leave space for the sidebar */
+      width: calc(100% - 320px);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    .chat-header {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: #fff; /* White background for header */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .user-avatar img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      background-color: #fff; /* White background for messages area */
+    }
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      background-color: #ffe5b4; /* Peach color for input area */
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+    .chat-input button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #ffcc80; /* Light peach color for button */
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .chat-input button:hover {
+      background-color: #ffb74d; /* Darker peach on hover */
+    }
+    .chat-message {
+      margin-bottom: 5px; /* Space between messages */
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar" aria-label="Names and Group Chats" aria-hidden="false">
+    <div class="sidebar__content">
+      <button class="back-button" onclick="window.location.href='Student-landing-page.html'">Back</button>
+      <h2>Group Chats</h2>
+      <ul>
+        <li><a href="#" class="chat-link" data-chat="group1">Group Chat 1</a></li>
+        <li><a href="#" class="chat-link" data-chat="group2">Group Chat 2</a></li>
+        <li><a href="#" class="chat-link" data-chat="group3">Group Chat 3</a></li>
+      </ul>
+      <h2>Contacts</h2>
+      <ul>
+        <li><a href="#" class="chat-link" data-chat="contact1">Contact 1</a></li>
+        <li><a href="#" class="chat-link" data-chat="contact2">Contact 2</a></li>
+        <li><a href="#" class="chat-link" data-chat="contact3">Contact 3</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="user-avatar">
+        <img src="images/user_avatar.jpg" alt="User  Avatar"> <!-- Updated path to image -->
+      </div>
+      <h2>Chat Title</h2> <!-- This will be updated dynamically -->
+    </div>
+    <div class="chat-messages" id="messages"></div>
+    <div class="chat-input">
+      <input type="text" id="message-input" placeholder="Type your message">
+      <button id="send-button">Send</button>
+    </div>
+  </div>
+
+  <script>
+    // Sample chat data for demonstration purposes
+    const chatData = {
+      group1: {
+        name: "Group Chat 1",
+        messages: [
+          { sender: "Alice", text: "Hey everyone!" },
+          { sender: "Bob", text: "Hello!" },
+          { sender: "John", text: "What's up?" }
+        ]
+      },
+      group2: {
+        name: "Group Chat 2",
+        messages: [
+          { sender: "Charlie", text: "Are we still on for the meeting?" },
+          { sender: "John", text: "Yes, at 3 PM." }
+        ]
+      },
+      group3: {
+        name: "Group Chat 3",
+        messages: [
+          { sender: "Diana", text: "Looking forward to the party!" },
+          { sender: "John", text: "Me too!" }
+        ]
+      },
+      contact1: {
+        name: "Contact 1",
+        messages: [
+          { sender: "Contact 1", text: "Hi John!" },
+          { sender: "John", text: "Hello!" }
+        ]
+      },
+      contact2: {
+        name: "Contact 2",
+        messages: [
+          { sender: "Contact 2", text: "How are you?" },
+          { sender: "John", text: "I'm good, thanks!" }
+        ]
+      },
+      contact3: {
+        name: "Contact 3",
+        messages: [
+          { sender: "Contact 3", text: "Let's catch up soon." },
+          { sender: "John", text: "Absolutely!" }
+        ]
+      }
+    };
+
+    // Function to open chat window
+    function openChat(chatId) {
+      // Get the chat data based on the chatId
+      const chat = chatData[chatId];
+
+      // Update the chat header
+      const chatHeader = document.querySelector('.chat-header h2');
+      chatHeader.textContent = chat.name;
+
+      // Clear previous messages
+      const messagesContainer = document.getElementById('messages');
+      messagesContainer.innerHTML = '';
+
+      // Display the messages for the selected chat
+      chat.messages.forEach(message => {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message');
+        messageElement.textContent = `${message.sender}: ${message.text}`;
+        messagesContainer.appendChild(messageElement);
+      });
+    }
+
+    // Add event listeners to chat links
+    document.querySelectorAll('.chat-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault(); // Prevent default link behavior
+        const chatId = link.dataset.chat; // Get the chat ID from data attribute
+        openChat(chatId); // Call the function to open the chat
+      });
+    });
+
+    // Optional: Add functionality to send messages
+    document.getElementById('send-button').addEventListener('click', () => {
+      const input = document.getElementById('message-input');
+      const messageText = input.value.trim();
+      if (messageText) {
+        const chatHeader = document.querySelector('.chat-header h2').textContent;
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message');
+        messageElement.textContent = `You: ${messageText}`;
+        document.getElementById('messages').appendChild(messageElement);
+        input.value = ''; // Clear input field
+      }
+    });
+  </script>
+</body>
+</html>
