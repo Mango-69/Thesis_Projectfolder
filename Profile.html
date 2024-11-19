@@ -27,7 +27,7 @@
             padding: 20px;
             border: 1px solid #888;
             width: 300px; /* Set a fixed width */
-            height: 300px; /* Set a fixed height to make it square */
+            height: auto; /* Set height to auto */
             display: flex; /* Use flexbox for layout */
             flex-direction: column; /* Stack children vertically */
             justify-content: center; /* Center content vertically */
@@ -69,7 +69,18 @@
         /* Ensure the body has a default background */
         body {
             background-color: #f4f4f4; /* Default background color */
+
             transition: background-image 0.5s; /* Smooth transition for background image change */
+        
+            background-position: center; /* Center the background image */
+        
+            background-repeat: no-repeat; /* Prevent the background from repeating */
+        
+            background-size: cover; /* Ensure the background image covers the entire page */
+        
+            height: 100vh; /* Set the height to 100% of the viewport height */
+        
+            margin: 0; /* Remove default margin */
         }
 
         .container {
@@ -79,6 +90,12 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-icon {
+            cursor: pointer;
+            margin-left: 10px;
+            color: #007BFF; /* Blue color for the icon */
         }
     </style>
 </head>
@@ -90,8 +107,8 @@
             <img id="profilePicture" src="images/Emoom.jpg" alt="Profile Picture">
             <div>
                 <h1>Ashley Cylesce C. Cabasan</h1>
-                <p>@Spookytime</p>
-                <p>Location: Cebu, Philippines</p>
+                <p id="username">@Spookytime <i class="fas fa-pencil-alt edit-icon" onclick="editUsername()"></i></p>
+                <p id="location">Location: Cebu, Philippines <i class="fas fa-pencil-alt edit-icon" onclick="editLocation()"></i></p>
             </div>
         </div>
 
@@ -103,29 +120,11 @@
         </div>
 
         <div class="bio">
+
             <h2>About Me</h2>
-            <p>Howdy! Welcome to my Profile!</p>
-            <p>They/Them | 22 | Bi |💖💜💙</p>
-        </div>
-
-        <div class="posts">
-            <h2>Posts</h2>
-            <div class="post">
-                <h3>My First Post</h3>
-
-                <p>This is the content of my first post. I'm excited to share my thoughts and experiences!</p>
-                <div class="timestamp">Posted on: January 1, 2023</div>
-            </div>
-            <div class="post">
-                <h3>Another Day, Another Adventure</h3>
-                <p>Today I went hiking in the mountains. The views were breathtaking!</p>
-                <div class="timestamp">Posted on: February 15, 2023</div>
-            </div>
-            <div class="post">
-                <h3>Learning New Skills</h3>
-                <p>I've started learning web development, and it's been an amazing journey so far. Can't wait to build my own website :D!</p>
-                <div class="timestamp">Posted on: March 10, 2023</div>
-            </div>
+        
+            <textarea id="bioText" rows="4" style="width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 10px;">Howdy! Welcome to my Profile! They/Them | 22 | Bi | 💖💜💙</textarea>
+        
         </div>
     </div>
 
@@ -138,6 +137,14 @@
             <input type="file" id="profilePictureInput" accept="image/*" style="display:none;">
             <button id="editBackgroundButton">Edit Background</button>
             <input type="file" id="backgroundInput" accept="image/*" style="display:none;">
+            <div>
+                <label for="newUsername">Change @:</label>
+                <input type="text" id="newUsername" placeholder="New Username">
+            </div>
+            <div>
+                <label for="newLocation">Change Location:</label>
+                <input type="text" id="newLocation" placeholder="New Location">
+            </div>
         </div>
     </div>
 
@@ -149,6 +156,9 @@
         const profilePictureInput = document.getElementById("profilePictureInput");
         const backgroundInput = document.getElementById("backgroundInput");
         const profilePicture = document.getElementById("profilePicture");
+        const usernameElement = document.getElementById("username");
+        const locationElement = document.getElementById("location");
+        const bioTextElement = document.getElementById("bioText");
 
         // Open the modal when the edit profile button is clicked
         editProfileButton.onclick = function() {
@@ -196,17 +206,60 @@
                     document.body.style.backgroundImage = `url(${e.target.result})`; // Set the new background
                     document.body.style.backgroundSize = "cover"; // Cover the entire body
                     document.body.style.backgroundPosition = "center"; // Center the background image
-                    localStorage.setItem('backgroundImage', e.target.result); // Save the background image to localStorage
                 }
                 reader.readAsDataURL(file); // Read the file as a data URL
             }
+        }
+
+        // Function to edit the bio
+        function editBio() {
+
+            const newBio = prompt("Enter your new bio:", document.getElementById("bioText").value);
+        
+            if (newBio !== null) {
+        
+                document.getElementById("bioText").value = newBio; // Update the bio text
+        
+            }
+        
+        }
+
+        // Function to edit the username
+        function editUsername() {
+            const newUsername = prompt("Enter your new username:", usernameElement.innerText.replace('@', '').trim());
+            if (newUsername !== null) {
+                usernameElement.innerText = `@${newUsername}`; // Update the username text
+            }
+        }
+
+        // Function to edit the location
+        function editLocation() {
+            const newLocation = prompt("Enter your new location:", locationElement.innerText.replace('Location: ', '').trim());
+            if (newLocation !== null) {
+                locationElement.innerText = `Location: ${newLocation}`; // Update the location text
+            }
+        }
+
+        // Save changes to username and location when the modal is closed
+        closeButton.onclick = function() {
+            const newUsername = document.getElementById("newUsername").value;
+            const newLocation = document.getElementById("newLocation").value;
+
+            if (newUsername) {
+                usernameElement.innerText = `@${newUsername}`; // Update the username text
+            }
+            if (newLocation) {
+                locationElement.innerText = `Location: ${newLocation}`; // Update the location text
+            }
+
+            modal.style.display = "none"; // Close the modal
         }
 
         // Load the background image from localStorage on page load
         window.onload = function() {
             const savedBackgroundImage = localStorage.getItem('backgroundImage');
             if (savedBackgroundImage) {
-                document.body.style.backgroundImage = `url(${savedBackgroundImage})`; // Set the saved background
+                document.body.style.backgroundImage = `url(${savedBackgroundImage}`; // Set the saved background
                 document.body.style.backgroundSize = "cover"; // Cover the entire body
                 document.body.style.backgroundPosition = "center"; // Center the background image
             }

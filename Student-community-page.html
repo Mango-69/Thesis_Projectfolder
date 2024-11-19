@@ -1,43 +1,268 @@
 <!DOCTYPE html>
-<html>
-<title>W3.CSS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Community</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="css/Landing-page.css">
+  <style>
+    /* Additional styles for posts */
+    .post-container {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgb(0, 4, 12);
+      margin: 20px 0;
+      padding: 15px;
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+    }
+
+    .post-header img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .post-content {
+      margin-top: 10px;
+    }
+
+    .comment-section {
+      margin-top: 10px;
+    }
+
+    .comment {
+      margin: 5px 0;
+    }
+
+    .show-more {
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
 <body>
-
-<!-- Sidebar -->
-<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
-  <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-  <a href="#" class="w3-bar-item w3-button">Link 1</a>
-  <a href="#" class="w3-bar-item w3-button">Link 2</a>
-  <a href="#" class="w3-bar-item w3-button">Link 3</a>
-</div>
-
-<!-- Page Content -->
-<div class="w3-teal">
-  <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
-  <div class="w3-container">
-    <h1>My Page</h1>
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="Student-landing-page.html" onclick="stayOpen()">
+      <i class="fa-solid fa-house-user" style="margin-right: 10px;"></i> Home
+    </a>
+    <a href="Profile.html" onclick="stayOpen()">
+      <i class="fa-solid fa-user" style="margin-right: 10px;"></i> Profile
+    </a>
+    <a href="Messeges.html" onclick="stayOpen()">
+      <i class="fa-solid fa-inbox" style="margin-right: 10px;"></i> Messages
+    </a>
+    <a href="Student-community-page.html" onclick="stayOpen()">
+      <i class="fa-solid fa-user-group" style="margin-right: 10px;"></i> Community
+    </a>
+    <a href="Notifications.html" onclick="stayOpen()">
+      <i class="fa-regular fa-bell" style="margin-right: 10px;"></i> Notification
+    </a>
+    <a href="Personal-journal-pin.html" onclick="stayOpen()">
+      <i class="fa-solid fa-book" style="margin-right: 10px;"></i> Personal Journal
+    </a>
+    <a href="Student-therapist-page.html" onclick="stayOpen()">
+      <i class="fa-solid fa-comments" style="margin-right: 10px;"></i> Connect with Therapist
+    </a>
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" onchange="toggleTheme()">
+        <div class="slider round"></div>
+      </label>
+      <span style="color: #818181; margin-left: 10px;">Toggle Theme</span>
+      <a href="Main-page.html">
+        <button><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </a>
+    </div>
   </div>
-</div>
 
-<img src="img_car.jpg" alt="Car" style="width:100%">
+  <div id="main">
+    <button class="openbtn" id="sidebarButton" onclick="openNav()">&#9776;</button>
+    <div class="content-container">
+      <h1>Community</h1>
+      <p>Welcome to the community page! Here you can connect with others.</p>
 
-<div class="w3-container">
-<p>This sidebar is hidden by default, (style="display:none")</p>
-<p>You must click on the "hamburger" icon (top left) to open it.</p>
-<p>The sidebar will hide a part of the page content.</p>
-</div>
+      <!-- Post Creation Section -->
+      <div>
+        <textarea id="postContent" placeholder="What's on your mind?" rows="3" style="width: 100%;"></textarea>
+        <div>
+          <button onclick="createPost()">Post</button>
+          <input type="file" id="fileInput" accept="image/*,video/*" style="display: inline-block;">
+        </div>
+      </div>
 
-<script>
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-}
+      <!-- Posts Section -->
+      <div id="postsContainer"></div>
+    </div>
+  </div>
 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-}
-</script>
-     
+  <script>
+    let posts = [];
+
+    function openNav() {
+      document.getElementById("mySidebar").style.left = "0";
+      document.getElementById("main").style.marginLeft = "250px"; // Adjust this to match sidebar width
+      document.getElementById("sidebarButton").classList.add("hidden");
+    }
+
+    function closeNav() {
+      document.getElementById("mySidebar").style.left = "-250px"; // Hide sidebar
+      document.getElementById("main").style.marginLeft = "0"; // Reset margin
+      document.getElementById("sidebarButton").classList.remove("hidden");
+    }
+
+    function toggleTheme() {
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', newTheme);
+      document.documentElement.setAttribute('data-theme', newTheme);
+      document.getElementById('checkbox').checked = newTheme === 'dark'; // Update toggle state
+    }
+
+    // On page load, check for saved theme preference
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('checkbox').checked = savedTheme === 'dark'; // Set the toggle state
+
+    function createPost() {
+      const content = document.getElementById('postContent').value;
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+
+      if (content.trim() === '' && !file) {
+        alert('Please enter some content or attach a file.');
+        return;
+      }
+
+      const post = {
+        id: posts.length,
+        content: content,
+        file: file ? URL.createObjectURL(file) : null,
+        comments: [],
+        likes: 0,
+        user: {
+          name: '', 
+          profilePicture: ''
+        }
+      };
+
+      posts.push(post);
+      document.getElementById('postContent').value = '';
+      fileInput.value = '';
+      renderPosts();
+    }
+
+    function renderPosts() {
+      const postsContainer = document.getElementById('postsContainer');
+      postsContainer.innerHTML = '';
+
+      posts.forEach(post => {
+        const postDiv = document.createElement('div');
+        postDiv.className = 'post-container';
+
+        postDiv.innerHTML = `
+          <div class="post-header">
+            <img src="${post.user.profilePicture}" alt="Profile Picture">
+            <strong>${post.user.name}</strong>
+          </div>
+          <div class="post-content">
+            <p>${post.content}</p>
+            ${post.file ? `<img src="${post.file}" alt="Attached File" style="max-width: 100%;"/>` : ''}
+          </div>
+          <div class="like-comment-section">
+            <button onclick="likePost(${post.id})">Like (${post.likes})</button>
+            <div class="comment-section">
+              <input type="text" id="commentInput-${post.id}" placeholder="Add a comment...">
+              <button onclick="addComment(${post.id})">Comment</button>
+              <div id="comments-${post.id}" class="comments"></div>
+              <span id="showMore-${post.id}" class="show-more hidden" onclick="toggleComments(${post.id})">Show more</span>
+            </div>
+          </div>
+        `;
+
+        // Render comments
+        renderComments(post, postDiv);
+
+        postsContainer.appendChild(postDiv);
+      });
+    }
+
+    function likePost(postId) {
+      posts[postId].likes++;
+      renderPosts();
+    }
+
+    function addComment(postId) {
+      const commentInput = document.getElementById(`commentInput-${postId}`);
+      const commentText = commentInput.value;
+
+      if (commentText.trim() === '') {
+        alert('Please enter a comment.');
+        return;
+      }
+
+      posts[postId].comments.push(commentText);
+      commentInput.value = '';
+      renderPosts();
+    }
+
+    function renderComments(post, postDiv) {
+      const commentsDiv = postDiv.querySelector(`#comments-${post.id}`);
+      commentsDiv.innerHTML = '';
+
+      const commentsToShow = post.comments.slice(0, 5);
+      commentsToShow.forEach(comment => {
+        const commentDiv = document.createElement('div');
+        commentDiv.className = 'comment';
+        commentDiv.textContent = comment;
+        commentsDiv.appendChild(commentDiv);
+      });
+
+      // Show more/less functionality
+      if (post.comments.length > 5) {
+        const showMoreLink = postDiv.querySelector(`#showMore-${post.id}`);
+        showMoreLink.classList.remove('hidden');
+        showMoreLink.textContent = 'Show more';
+        showMoreLink.setAttribute('data-expanded', 'false');
+
+        showMoreLink.onclick = function() {
+          const isExpanded = showMoreLink.getAttribute('data-expanded') === 'true';
+          if (isExpanded) {
+            // Collapse comments
+            commentsDiv.innerHTML = '';
+            renderComments(post, postDiv); // Re-render only the first 5 comments
+            showMoreLink.textContent = 'Show more';
+          } else {
+            // Expand comments
+            post.comments.forEach(comment => {
+              const commentDiv = document.createElement('div');
+              commentDiv.className = 'comment';
+              commentDiv.textContent = comment;
+              commentsDiv.appendChild(commentDiv);
+            });
+            showMoreLink.textContent = 'Show less';
+          }
+          showMoreLink.setAttribute('data-expanded', (!isExpanded).toString());
+        };
+      }
+    }
+
+    function attachFile() {
+      const fileInput = document.getElementById('fileInput');
+      fileInput.click(); // Open file dialog
+    }
+  </script>
 </body>
-</html> 
+</html>

@@ -116,3 +116,19 @@ body {
     font-size: 12px;
     color: #999;
 }
+.bio-container {
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    margin: 20px; /* Add some margin around the container */
+}
+
+#bioText {
+    width: 100%; /* Full width of the container */
+    max-width: 600px; /* Optional: Set a max width for the text area */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px; /* Padding inside the text area */
+    resize: none; /* Prevent resizing if desired */
+}
