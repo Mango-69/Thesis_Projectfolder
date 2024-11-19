@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student-Therapist Landing Page</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        .therapist-container {
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #ecf0f1;
+        }
+
+        .therapist {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #bdc3c7;
+        }
+
+        .therapist:last-child {
+            border-bottom: none;
+        }
+
+        button, .back-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            text-decoration: none; /* Remove underline from anchor */
+            display: inline-block; /* Make anchor behave like a button */
+            border-radius: 4px; /* Rounded corners */
+        }
+
+        button:hover, .back-button:hover {
+            background-color: #2980b9;
+        }
+
+        .chat-button {
+            background-color: #2ecc71;
+        }
+
+        .chat-button:hover {
+            background-color: #27ae60;
+        }
+
+        .back-button {
+            margin-top: 20px; /* Space above the back button */
+            background-color: #e74c3c; /* Red color for back button */
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Therapists</h1>
+
+    <section id="therapists">
+        <div class="therapist-container">
+            <!-- Therapist entries will be added here -->
+        </div>
+    </section>
+
+    <a href="Student-landing-page.html" class="back-button">Back to home</a>
+
+    <script>
+        // Function to handle starting a chat with a selected therapist
+        function startChat(therapistName) {
+            alert("Starting chat with " + therapistName);
+            // Here you would typically redirect to a chat interface or open a chat window
+            // For example: window.location.href = '/chat?therapist=' + encodeURIComponent(therapistName);
+        }
+    </script>
+</body>
+</html>

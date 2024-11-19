@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        .user-container {
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #ecf0f1;
+        }
+
+        .user {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #bdc3c7;
+        }
+
+        .user:last-child {
+            border-bottom: none;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .delete-button {
+            background-color: #e74c3c;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        .form-container {
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            background-color: #ecf0f1;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+
+    <section id="pre-medical-forms">
+        <h2>Pre-Medical Forms</h2>
+        <div class="form-container">
+            <h3>Patient Pre-Medical Form</h3>
+            <p><strong>Patient Name:</strong> John Doe</p>
+            <p><strong>Age:</strong> 30</p>
+            <p><strong>Medical History:</strong> No known allergies, previous surgery in 2015.</p>
+            <p><strong>Current Medications:</strong> None</p>
+            <button>Download Form</button>
+        </div>
+    </section>
+
+    <section id="users">
+
+    <script>
+        // Function to handle adding a user as admin
+        function addAsAdmin(userName) {
+            alert(userName + " has been added as an admin.");
+            // Here you would typically make an API call to update the user's role in the database
+        }
+
+        // Function to handle deleting a user
+        function deleteUser (userName) {
+            const confirmation = confirm("Are you sure you want to delete " + userName + "?");
+            if (confirmation) {
+                alert(userName + " has been deleted.");
+                // Here you would typically make an API call to delete the user from the database
+            }
+        }
+
+        // Add event listeners to buttons
+        document.querySelectorAll('.add-admin-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const userName = this.parentElement.parentElement.firstChild.textContent;
+                addAsAdmin(userName);
+            });
+        });
+
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const userName = this.parentElement.parentElement.firstChild.textContent;
+                deleteUser (userName);
+            });
+        });
+    </script>
+</body>
+</html>
