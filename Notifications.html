@@ -58,46 +58,20 @@
 
     <div id="notifications">
         <h3>Notifications</h3>
-        <ul id="notificationList"></ul>
+        <ul id="notificationList">
+            <li>No new notifications.</li> <!-- Default message -->
+        </ul>
     </div>
 
     <script>
-        const notifications = [];
-
-        // Simulate fetching notifications
+        // Empty function to fetch notifications
         function fetchNotifications() {
-            // Simulated messages
-            const messages = [
-                "You have a new message from John.",
-                "Your message to Sarah was read."
-            ];
-
-            // Simulated posts
-            const posts = [
-                "Alice commented on your post.",
-                "Bob liked your post."
-            ];
-
-            // Combine messages and posts into notifications
-            notifications.length = 0; // Clear previous notifications
-            notifications.push(...messages, ...posts);
+            // This function will be implemented later
         }
 
-        // Function to show notifications
+        // Empty function to show notifications
         function showNotifications() {
-            fetchNotifications(); // Fetch notifications when showing them
-            const notificationList = document.getElementById('notificationList');
-            notificationList.innerHTML = ''; // Clear previous notifications
-
-            if (notifications.length === 0) {
-                notificationList.innerHTML = '<li>No new notifications.</li>';
-            } else {
-                notifications.forEach(notification => {
-                    const li = document.createElement('li');
-                    li.textContent = notification;
-                    notificationList.appendChild(li);
-                });
-            }
+            // This function will be implemented later
         }
 
         // Call the function to show notifications on page load

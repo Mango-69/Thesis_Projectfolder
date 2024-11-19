@@ -9,10 +9,11 @@
       display: flex;
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f8f8f8; /* Light background for contrast */
+      background-color: #e0e0e0; /* Light gray background for contrast */
     }
+    
     .sidebar {
-      background-color: #ffe5b4; /* Peach color for sidebar */
+      background-color: #1e3a78; /* Dark blue for sidebar */
       width: 300px;
       height: 100vh;
       box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
@@ -21,12 +22,15 @@
       top: 0;
       left: 0;
     }
+    
     .sidebar__content {
       padding: 16px;
+      color: #ffffff; /* White text for better contrast */
     }
+    
     .back-button {
-      background-color: #ffcc80; /* Light peach color for button */
-      color: white;
+      background-color: #3b5998; /* Lighter blue for button */
+      color: #ffffff; /* White text */
       border: none;
       padding: 10px;
       border-radius: 4px;
@@ -35,22 +39,29 @@
       width: 100%; /* Full width */
       text-align: center; /* Center text */
     }
+    
     .sidebar__content h2 {
       font-size: 1.5em;
       margin-bottom: 10px;
+      color: #ffffff; /* White text */
     }
+    
     .sidebar__content ul {
       list-style-type: none;
       padding: 0;
     }
+    
     .sidebar__content li {
       padding: 8px;
       cursor: pointer;
       transition: background-color 0.3s;
+      color: #ffffff; /* White text */
     }
+    
     .sidebar__content li:hover {
-      background-color: #ffd699; /* A slightly darker peach on hover */
+      background-color: #2a4d8f; /* Darker blue on hover */
     }
+    
     .chat-container {
       margin-left: 320px; /* Leave space for the sidebar */
       width: calc(100% - 320px);
@@ -58,51 +69,63 @@
       flex-direction: column;
       height: 100vh;
     }
+    
     .chat-header {
       display: flex;
       align-items: center;
       padding: 10px;
-      background-color: #fff; /* White background for header */
+      background-color: #1e3a78; /* Dark blue for header */
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      color: #ffffff; /* White text */
     }
+    
     .user-avatar img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
       margin-right: 10px;
     }
+    
     .chat-messages {
       flex: 1;
       padding: 10px;
       overflow-y: auto;
-      background-color: #fff; /* White background for messages area */
+      background-color: #0d1b2a; /* Very dark blue for messages area */
+      color: #ffffff; /* White text for messages */
     }
+    
     .chat-input {
       display: flex;
       padding: 10px;
-      background-color: #ffe5b4; /* Peach color for input area */
+      background-color: #355394; /* Dark blue for input area */
       box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     }
+    
     .chat-input input {
       flex: 1;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
       margin-right: 10px;
+      background-color: #ffffff; /* White background for input */
     }
+    
     .chat-input button {
       padding: 10px 15px;
       border: none;
-      background-color: #ffcc80; /* Light peach color for button */
-      color: white;
+      background-color: #3b5998; /* Lighter blue for button */
+      color: #ffffff; /* White text */
       border-radius: 4px;
       cursor: pointer;
     }
+    
     .chat-input button:hover {
-      background-color: #ffb74d; /* Darker peach on hover */
+      background-color: #2a4d8f; /* Darker blue on hover */
     }
+    
     .chat-message {
       margin-bottom: 5px; /* Space between messages */
+      color: #ffffff; /* White text for messages */
     }
   </style>
 </head>
@@ -116,7 +139,7 @@
       </ul>
       <h2>Contacts</h2>
       <ul>
-        <li><a href="#" class="chat-link" data-chat="contact1">Contact 1</a></li>
+        <li><a href="#" class="chat-link" data-chat="contact1">Group Chat 1</a></li>
       </ul>
     </div>
   </div>
@@ -142,25 +165,24 @@
         name: "Group Chat 1",
         messages: [
           { sender: "Alice", text: "Hey everyone!" },
-          { sender: "Bob", text: "Hello!" },
-          { sender: "John", text: "What's up?" }
         ]
       },
     };
-
+  
     // Function to open chat window
     function openChat(chatId) {
+      
       // Get the chat data based on the chatId
       const chat = chatData[chatId];
-
+  
       // Update the chat header
       const chatHeader = document.querySelector('.chat-header h2');
       chatHeader.textContent = chat.name;
-
+  
       // Clear previous messages
       const messagesContainer = document.getElementById('messages');
       messagesContainer.innerHTML = '';
-
+  
       // Display the messages for the selected chat
       chat.messages.forEach(message => {
         const messageElement = document.createElement('div');
@@ -169,7 +191,7 @@
         messagesContainer.appendChild(messageElement);
       });
     }
-
+  
     // Add event listeners to chat links
     document.querySelectorAll('.chat-link').forEach(link => {
       link.addEventListener('click', e => {
@@ -178,7 +200,7 @@
         openChat(chatId); // Call the function to open the chat
       });
     });
-
+  
     // Optional: Add functionality to send messages
     document.getElementById('send-button').addEventListener('click', () => {
       const input = document.getElementById('message-input');
@@ -190,6 +212,14 @@
         messageElement.textContent = `You: ${messageText}`;
         document.getElementById('messages').appendChild(messageElement);
         input.value = ''; // Clear input field
+      }
+    });
+  
+    // Add event listener for the Enter key in the message input
+    document.getElementById('message-input').addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') { // Check if the pressed key is Enter
+        event.preventDefault(); // Prevent the default action (like a newline in the input)
+        document.getElementById('send-button').click(); // Trigger the click event on the send button
       }
     });
   </script>
