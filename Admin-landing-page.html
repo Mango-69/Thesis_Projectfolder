@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="styles.css"> 
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -81,10 +81,12 @@
     <section id="users">
 
     <script>
+        
         // Function to handle adding a user as admin
         function addAsAdmin(userName) {
+
             alert(userName + " has been added as an admin.");
-            // Here you would typically make an API call to update the user's role in the database
+            // API call to update the user's role in the database
         }
 
         // Function to handle deleting a user
@@ -92,7 +94,7 @@
             const confirmation = confirm("Are you sure you want to delete " + userName + "?");
             if (confirmation) {
                 alert(userName + " has been deleted.");
-                // Here you would typically make an API call to delete the user from the database
+                //API call to delete the user from the database
             }
         }
 
