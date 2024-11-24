@@ -1,19 +1,38 @@
-<!-- -->
-<!-- contenteditable="true"-->
-<html>
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Journal</title>
-            <link rel="stylesheet" href="css/Journal-styles.css"/>
-        </head>
-        <body>
-            <article contenteditable="true">
-                <h2>Journal</h2>
-                <p>It's safe here.</p>
-                <p>pour your heart out, it's okay</p>
-                </div>
-            </article>
-            <script src="javascript/Journal-msc.js"></script>
-        </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal</title>
+    <link rel="stylesheet" href="css/Journal-styles.css"/>
+</head>
+<body>
+    <article contenteditable="true" id="journalContent">
+        <h2>Journal</h2>
+        <p>It's safe here.</p>
+        <p>pour your heart out, it's okay</p>
+    </article>
+    <button id="backButton">Return Home</button>
+
+    <script src="javascript/Journal-msc.js"></script>
+    <script>
+        // Load content from localStorage when the page loads
+        window.onload = function() {
+            const savedContent = localStorage.getItem('journalContent');
+            if (savedContent) {
+                document.getElementById('journalContent').innerHTML = savedContent;
+            }
+        };
+
+        // Save content to localStorage whenever the user types
+        document.getElementById('journalContent').addEventListener('input', function() {
+            localStorage.setItem('journalContent', this.innerHTML);
+        });
+
+        // Add functionality for the back button
+        document.getElementById('backButton').addEventListener('click', function() {
+            window.location.href = 'Student-landing-page.html';
+        });
+    </script>
+</body>
 </html>
