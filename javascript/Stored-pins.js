@@ -5,11 +5,12 @@ function changeBackground() {
   
   function validatePIN() {
     const enteredPin = document.getElementById('enterPin').value;
-    const correctPin = "1234"; // Replace with your actual PIN logic
+    const correctPin = "1234"; // Replace with actual PIN logic
 
     if (enteredPin === correctPin) {
+
         // Redirect to Journal.html
-        window.location.href = 'Journal.html'; // Change this to the path of your Journal.html
+        window.location.href = 'Journal.html'; 
     } else {
         alert("Incorrect PIN. Please try again.");
     }

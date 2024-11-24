@@ -1,8 +1,7 @@
-// Wait for the document to load before running the script 
+
 (function ($) {
   
-    // Use some Javascript and the URL #fragment to hide/show different parts of the page
-    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#Linking_to_an_element_on_the_same_page
+
     $(window).on('load hashchange', function(){
       
       // First hide all content regions, then show the content-region specified in the URL hash 
@@ -16,14 +15,8 @@
       // Now show the region specified in the URL hash
       $(region).show();
       
-      // Highlight the menu link associated with this region by adding the .active CSS class
       $('.main-menu a[href="'+ region +'"]').addClass('active'); 
   
-      // Alternate method: Use AJAX to load the contents of an external file into a div based on URL fragment
-      // This will extract the region name from URL hash, and then load [region].html into the main #content div
-      // var region = location.hash.toString() || '#first';
-      // $('#content').load(region.slice(1) + '.html')
-
       document.addEventListener('DOMContentLoaded', function() {
         console.log('Background image URL:', getComputedStyle(document.body).backgroundImage);
     });

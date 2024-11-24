@@ -16,102 +16,48 @@
             color: #2c3e50;
         }
 
-        .user-container {
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
             border: 1px solid #bdc3c7;
             padding: 10px;
-            margin-bottom: 20px;
-            background-color: #ecf0f1;
+            text-align: center;
         }
 
-        .user {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #bdc3c7;
-        }
-
-        .user:last-child {
-            border-bottom: none;
+        th {
+            background-color: #3498db;
+            color: white;
         }
 
         button {
             background-color: #3498db;
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 10px 20px;
             cursor: pointer;
         }
 
         button:hover {
             background-color: #2980b9;
         }
-
-        .delete-button {
-            background-color: #e74c3c;
-        }
-
-        .delete-button:hover {
-            background-color: #c0392b;
-        }
-
-        .form-container {
-            border: 1px solid #bdc3c7;
-            padding: 10px;
-            background-color: #ecf0f1;
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
     <h1>Admin Dashboard</h1>
 
-    <section id="pre-medical-forms">
-        <h2>Pre-Medical Forms</h2>
-        <div class="form-container">
-            <h3>Patient Pre-Medical Form</h3>
-            <p><strong>Patient Name:</strong> John Doe</p>
-            <p><strong>Age:</strong> 30</p>
-            <p><strong>Medical History:</strong> No known allergies, previous surgery in 2015.</p>
-            <p><strong>Current Medications:</strong> None</p>
-            <button>Download Form</button>
-        </div>
-    </section>
-
     <section id="users">
-
-    <script>
-        
-        // Function to handle adding a user as admin
-        function addAsAdmin(userName) {
-
-            alert(userName + " has been added as an admin.");
-            // API call to update the user's role in the database
-        }
-
-        // Function to handle deleting a user
-        function deleteUser (userName) {
-            const confirmation = confirm("Are you sure you want to delete " + userName + "?");
-            if (confirmation) {
-                alert(userName + " has been deleted.");
-                //API call to delete the user from the database
-            }
-        }
-
-        // Add event listeners to buttons
-        document.querySelectorAll('.add-admin-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const userName = this.parentElement.parentElement.firstChild.textContent;
-                addAsAdmin(userName);
-            });
-        });
-
-        document.querySelectorAll('.delete-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const userName = this.parentElement.parentElement.firstChild.textContent;
-                deleteUser (userName);
-            });
-        });
-    </script>
-</body>
-</html>
+        <h2>User Information</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>User Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                

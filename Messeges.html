@@ -35,7 +35,7 @@
       padding: 10px;
       border-radius: 4px;
       cursor: pointer;
-      margin-bottom: 10px; /* Space below the button */
+      margin-bottom: 10px;
       width: 100%; /* Full width */
       text-align: center; /* Center text */
     }
@@ -159,6 +159,7 @@
   </div>
 
   <script>
+
     // Sample chat data for demonstration purposes
     const chatData = {
       group1: {
@@ -201,7 +202,7 @@
       });
     });
   
-    // Optional: Add functionality to send messages
+    //Add functionality to send messages
     document.getElementById('send-button').addEventListener('click', () => {
       const input = document.getElementById('message-input');
       const messageText = input.value.trim();
@@ -214,14 +215,15 @@
         input.value = ''; // Clear input field
       }
     });
-  
-    // Add event listener for the Enter key in the message input
-    document.getElementById('message-input').addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') { // Check if the pressed key is Enter
-        event.preventDefault(); // Prevent the default action (like a newline in the input)
-        document.getElementById('send-button').click(); // Trigger the click event on the send button
-      }
-    });
+    
+    // Get the therapist name from the URL query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const therapistName = urlParams.get('therapist');
+
+    // You can now use the therapistName to customize the chat or display it on the page
+    if (therapistName) {
+        document.getElementById('chatHeader').textContent = `Chat with ${therapistName}`;
+    }
   </script>
 </body>
 </html>

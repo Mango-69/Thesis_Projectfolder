@@ -13,7 +13,7 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
-      transition: background-color 0.5s, color 0.5s; /* Smooth transition for background and text color */
+      transition: background-color 0.5s, color 0.5s;
       color: white; /* Default text color */
       position: relative; /* For overlay positioning */
       background-size: cover; /* Ensure background covers the entire body */
@@ -108,8 +108,7 @@
 
     function setPIN() {
         const newPin = document.getElementById('setPin').value;
-        // Here you would typically save the new PIN securely
-        // For demonstration, we'll just alert the user
+
         if (newPin) {
             alert("New PIN set successfully!"); // Notify the user
             document.getElementById('setPin').value = ''; // Clear the input field

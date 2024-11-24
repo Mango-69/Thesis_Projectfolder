@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userType = $_POST["user-type"]; // Capture the user type
 
     // Query to retrieve user data
-    // Make sure to adjust your database structure to include user type if necessary
+    // Make sure to adjust database structure to include user type if necessary
     $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password' AND user_type = '$userType'";
     $result = $conn->query($query);
 
