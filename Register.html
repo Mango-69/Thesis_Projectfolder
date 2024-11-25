@@ -115,6 +115,13 @@
                 document.getElementById('therapist-fields').style.display = 'block';
             }
         }
+
+        function redirectToMainPage() {
+            setTimeout(() => {
+                window.location.href = "Main-page.html";
+            }, 200); // Delays the redirect slightly to allow form submission
+        }
+        
     </script>
 </head>
 <body class="bg">
@@ -135,7 +142,7 @@
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="text" name="address" placeholder="Address" required>
                 <input type="text" name="contact-no" placeholder="Contact Number" required>
-            
+                
                 <label for="birthdate" style="margin-top: 10px;">Birthday:</label>
                 <div class="date-fields">
                     <select name="birthdate-month" required>
@@ -177,8 +184,8 @@
                 <input type="password" name="therapist-password" placeholder="Password" required>
             </div>
 
-            <button type="submit">Register</button>
-            <a href="Main-page.html" style="margin-top: 10px;">Back to Main Page</a> <!-- Back button -->
+            <button type="submit" onclick="redirectToMainPage()">Register</button>
+            <a href="Main-page.html" style="margin-top: 10px;">Back to Main Page</a> 
         </form>
     </div>
 </body>

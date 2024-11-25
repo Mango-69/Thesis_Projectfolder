@@ -7,11 +7,11 @@
     <style>
         body, html {
             height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            margin: 0; /* Remove default margin */
+            display: flex; /* Use flexbox for centering */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
+            justify-content: center; /* Center items vertically */
         }
 
         .bg {
@@ -20,32 +20,32 @@
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            position: absolute;
+            position: absolute; /* Position background to cover the entire viewport */
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            z-index: -1;
+            z-index: -1; /* Send background to the back */
         }
 
         .container {
             background-color: #ffa299;
             color: #cf807b;
-            padding: 20px;
+            padding: 20px; /* Adjust padding for a smaller box */
             border-radius: 10px;
-            width: 300px;
+            width: 300px; /* Set a fixed width */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            display: flex; /* Use flexbox */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
+            justify-content: center; /* Center items vertically */
+            position: relative; /* For absolute positioning of the image */
         }
-
+        
         .top-image {
-            width: 350px;
-            height: auto;
-            margin-bottom: 1;
+            width: 350px; /* Set the width of the image */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 1; /* Space between logo and container */
         }
 
         h1 {
@@ -54,13 +54,13 @@
         }
 
         input[type="text"], input[type="password"], select {
-            width: 80%;
-            max-width: 250px;
+            width: 80%; /* Set width to 80% of the container */
+            max-width: 250px; /* Maximum width for the input and select */
             padding: 10px;
-            margin: 10px 0;
+            margin: 10px 0; /* Space between inputs */
             border: 1px solid #ccc;
             border-radius: 5px;
-            text-align: center;
+            text-align: center; /* Center the text within the input and select */
         }
 
         button {
@@ -72,7 +72,7 @@
             cursor: pointer;
             font-size: 16px;
             margin-top: 10px;
-            width: 100%;
+            width: 100%; /* Make the button full width of the container */
         }
 
         button:hover {
@@ -82,12 +82,14 @@
         a {
             text-decoration: none;
             color: #ecf0f1;
-            margin-top: 10px;
-            display: inline-block;
         }
 
         a:hover {
             color: #f39c12;
+        }
+
+        .user-inputs {
+            display: none; /* Hide by default */
         }
 
         /* Modal styles */
@@ -126,16 +128,10 @@
             text-decoration: none;
             cursor: pointer;
         }
-
-        .checkbox-group {
-            margin: 10px 0;
-        }
     </style>
     <script>
         function handleLogin(event) {
             event.preventDefault(); // Prevent the default form submission
-            
-            checkFirstLogin(); // Check if it's the first login
 
             var userType = document.getElementById('user-type').value;
 
@@ -145,6 +141,9 @@
                 return;
             }
 
+            // Check if it's the user's first login
+            checkFirstLogin();
+
             // Redirect based on the selected user type
             if (userType === 'student') {
                 window.location.href = 'Student-landing-page.html';
@@ -152,6 +151,27 @@
                 window.location.href = 'Therapist-landing-page.html';
             } else if (userType === 'admin') {
                 window.location.href = 'Admin-landing-page.html';
+            }
+        }
+
+        function updateLoginFields() {
+            var userType = document.getElementById('user-type').value;
+            var adminFields = document.getElementById('admin-fields');
+            var studentFields = document.getElementById('student-fields');
+            var therapistFields = document.getElementById('therapist-fields');
+
+            // Hide all fields initially
+            adminFields.style.display = 'none';
+            studentFields.style.display = 'none';
+            therapistFields.style.display = 'none';
+
+            // Show fields based on user type
+            if (userType === 'admin') {
+                adminFields.style.display = 'block';
+            } else if (userType === 'student') {
+                studentFields.style.display = 'block';
+            } else if (userType === 'therapist') {
+                therapistFields.style.display = 'block';
             }
         }
 
@@ -166,141 +186,6 @@
             var modal = document.getElementById("preMedicalModal");
             modal.style.display = "none";
         }
-
-        // Check if the user is logging in for the first time
-        function checkFirstLogin() {
-            var isFirstLogin = localStorage.getItem('isFirstLogin');
-
-            if (!isFirstLogin) {
-                showPreMedicalForm();
-                localStorage.setItem('isFirstLogin', 'true'); // Set the flag for future logins
-            }
-        }
-
-        // Handle the pre-medical form submission
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('preMedicalForm').onsubmit = function(event) {
-                event.preventDefault(); // Prevent default form submission
-                
-                // Add logic to save the pre-medical form data
-                alert("Pre-Medical Form submitted!"); // Replace with actual submission logic
-                closeModal(); // Close the modal after submission
-            };
-        });
-    </script>
-</head>
-<body class="bg"> 
-
-    <!-- Pre-Medical Form Modal -->
-    <div id="preMedicalModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Pre-Medical Form</h2>
-            <form id="preMedicalForm">
-                <label>Symptoms:</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="symptoms" value="Anxiety"> Anxiety</label><br>
-                    <label><input type="checkbox" name="symptoms" value="Depression"> Depression</label><br>
-                    <label><input type="checkbox" name="symptoms" value="Stress"> Stress</label><br>
-                    <label><input type="checkbox" name="symptoms" value="Mood Swings"> Mood Swings</label><br>
-                    <label><input type="checkbox" name="symptoms" value="Sleep Issues"> Sleep Issues</label><br>
-                    <label><input type="checkbox" name="symptoms" value="Other"> Other</label>
-                </div>
-
-                <label for="age">Age:</label>
-                <input type="text" id="age" name="age" required>
-
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="non-binary">Non-binary</option>
-                    <option value="transgender">Transgender</option>
-                    <option value="genderqueer">Genderqueer</option>
-                    <option value="agender">Agender</option>
-                    <option value="other">Other</option>
-                </select>
-
-                <label for="country">Country:</label>
-                <select id="country" name="country" required>
-                    <option value="">Select a country</option>
-
-                    <option value="AU">Australia</option>
-                    <option value="AT">Austria</option>
-                    
-                    <option value="BO">Bolivia</option>
-                    <option value="BR">Brazil</option>
-                    <option value="IO">British Indian Ocean Territory</option>
-                    <option value="BN">Brunei Darussalam</option>
-                    <option value="BG">Bulgaria</option>
-                    <option value="BF">Burkina Faso</option>
-                    <option value="BI">Burundi</option>
-                    <option value="CV">Cabo Verde</option>
-                    <option value="CA">Canada</option>
-                    <option value="KY">Cayman Islands</option>
-                    <option value="CU">Cuba</option>
-                    <option value="CW">Curaçao</option>
-                    <option value="FI">Finland</option>
-                    <option value="FR">France</option>
-                    <option value="GF">French Guiana</option>
-                    <option value="PF">French Polynesia</option>
-                    <option value="TF">French Southern Territories</option>
-                    <option value="GA">Gabon</option>
-                    <option value="GM">Gambia</option>
-                    <option value="GE">Georgia</option>
-                    <option value="DE">Germany</option>
-                    <option value="GH">Ghana</option>
-                    <option value="GI">Gibraltar</option>
-                    <option value="HM">Heard Island and McDonald Islands</option>
-                    <option value="VA">Holy See</option>
-                    <option value="HN">Honduras</option>
-                    <option value="HK">Hong Kong</option>
-                    <option value="HU">Hungary</option>
-                    <option value="IS">Iceland</option>
-                    <option value="IN">India</option>
-                    <option value="ID">Indonesia</option>
-                    <option value="IR">Iran, Islamic Republic of</option>
-                    <option value="IQ">Iraq</option>
-                    <option value="IE">Ireland</option>
-                    <option value="IM">Isle of Man</option>
-                    <option value="IL">Israel</option>
-                    <option value="IT">Italy</option>
-                    <option value="JM">Jamaica</option>
-                    <option value="JP">Japan</option>
-                    <option value="JE">Jersey</option>
-                    <option value="JO">Jordan</option>
-                    <option value="KZ">Kazakhstan</option>
-                    <option value="KE">Kenya</option>
-                    <option value="KI">Kiribati</option>
-                    <option value="KP">Korea, Democratic People's Republic of</option>
-                    <option value="PH">Philippines</option>
-                </select>
-
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    </div>
-</div>
-<script>
-    function handleLogin(event) {
-        event.preventDefault(); // Prevent the default form submission
-        
-        checkFirstLogin(); // Check if it's the first login
-        
-        alert("Login successful!"); 
-    }
-
-    // Function to show the pre-medical form modal
-    function showPreMedicalForm() {
-        var modal = document.getElementById("preMedicalModal");
-        modal.style.display = "block";
-    }
-
-    // Function to close the modal
-    function closeModal() {
-        var modal = document.getElementById("preMedicalModal");
-        modal.style.display = "none";
-    }
 
         // Check if the user is logging in for the first time
         function checkFirstLogin() {
@@ -337,21 +222,35 @@
     </script>
 </head>
 <body class="bg">
-    <img src="images/Logo.png" alt="Top Image" class="top-image"> 
-
+    <img src="images/Logo.png" alt="Top Image" class="top-image">
     <div class="container">
         <h1>Login</h1>
         <form onsubmit="handleLogin(event)">
-            <select name="user-type" id="user-type" onchange="updateLoginFields()">
+            <select id="user-type" name="user-type" onchange="updateLoginFields()" required>
                 <option value="">Select User Type</option>
                 <option value="student">Student</option>
-                <option value="therapist">Therapist</option>
                 <option value="admin">Admin</option>
+                <option value="therapist">Therapist</option>
             </select>
-            <input type="text" name="username" id="username-field" placeholder="Username or Email" required>
-            <input type="password" name="password" id="password-field" placeholder="Password" required>
-            <button type="submit">Login</button>
-            <a href="Main-page.html">Back to Main Page</a> <!-- Back button -->
+
+            <div id="admin-fields" class="user-inputs">
+                <input type="text" name="id-number" placeholder="ID Number" required>
+                <input type="password" name="admin-password" placeholder="Password" required>
+            </div>
+
+            <div id="student-fields" class="user-inputs">
+                <input type="text" name="username" placeholder="Username/Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <div id="therapist-fields" class="user-inputs">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="password" name="therapist-password" placeholder="Password" required>
+            </div>
+
+            <button type="submit" onclick="handleLogin(event)">Login</button>
+
+            <a href="#" onclick="showPreMedicalForm()">Need Help?</a>
         </form>
     </div>
 
@@ -404,52 +303,6 @@
         </div>
     </div>
 
-    <script>
-        // Function to show the pre-medical form modal
-        function showPreMedicalForm() {
-            var modal = document.getElementById("preMedicalModal");
-            modal.style.display = "block";
-        }
-
-        // Function to close the modal
-        function closeModal() {
-            var modal = document.getElementById("preMedicalModal");
-            modal.style.display = "none";
-        }
-
-        // Check if the user is logging in for the first time
-        function checkFirstLogin() {
-            var isFirstLogin = localStorage.getItem('isFirstLogin');
-
-            if (!isFirstLogin) {
-                showPreMedicalForm();
-                localStorage.setItem('isFirstLogin', 'true'); // Set the flag for future logins
-            }
-        }
-
-        // Handle the pre-medical form submission
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('preMedicalForm').onsubmit = function(event) {
-                event.preventDefault(); // Prevent default form submission
-
-                // Gather form data
-                const formData = new FormData(this);
-                const data = {};
-                formData.forEach((value, key) => {
-                    if (!data[key]) {
-                        data[key] = [];
-                    }
-                    data[key].push(value);
-                });
-
-                // Here you can add logic to send the data to your server or process it as needed
-                console.log(data); // For debugging purposes
-
-                alert("Pre-Medical Form submitted!"); // Replace with actual submission logic
-                closeModal(); // Close the modal after submission
-            };
-        });
-    </script>
 </body>
 </html>
-                   
+
