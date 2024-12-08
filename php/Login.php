@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config.php'; // Include your database configuration file
+require_once 'student.php'; 
 
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

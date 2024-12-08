@@ -2,6 +2,8 @@
 // Start session
 session_start();
 
+session_unset();
+
 // Destroy all sessions
 session_destroy();
 

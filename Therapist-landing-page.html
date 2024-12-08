@@ -9,11 +9,48 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
-            position: relative;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
         }
 
-        .main-content {
+        .sidebar {
+            background-color: #1e3a78; /* Dark blue for sidebar */
+            width: 250px;
+            height: 100vh;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .sidebar h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar li:hover {
+            background-color: #2a4d8f;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .chat-container {
+            margin-left: 250px; /* Make space for the sidebar */
+            width: calc(100% - 250px);
             padding: 20px;
         }
 
@@ -21,15 +58,11 @@
             color: #2c3e50;
         }
 
-        h2 {
-            color: #34495e;
-        }
-
         .message-container {
             border: 1px solid #bdc3c7;
             padding: 10px;
             margin-bottom: 20px;
-            max-height: 200px;
+            max-height: 300px;
             overflow-y: auto;
         }
 
@@ -56,12 +89,6 @@
             background-color: #2980b9;
         }
 
-        .form-container {
-            border: 1px solid #bdc3c7;
-            padding: 10px;
-            background-color: #ecf0f1;
-        }
-
         .logout-button {
             position: absolute;
             top: 20px;
@@ -76,86 +103,183 @@
         .logout-button:hover {
             background-color: #c0392b;
         }
+
+        /* Modal style for pre-medical form */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            width: 400px;
+            border-radius: 5px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            display: block;
+        }
+
+        /* Styling for the form */
+        .form-container {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <a href="Main-page.html" class="logout-button">Logout</a>
+    <!-- Sidebar for Patients -->
+    <div class="sidebar">
+        <button class="logout-button" onclick="window.location.href='Main-page.html'">Logout</button>
+        <h2>Patients</h2>
+        <ul>
+            <li><a href="#" onclick="startChat('Patient 1')">Patient 1</a></li>
+            <li><a href="#" onclick="startChat('Patient 2')">Patient 2</a></li>
+            <li><a href="#" onclick="startChat('Patient 3')">Patient 3</a></li>
+        </ul>
+    </div>
 
-    <div class="main-content">
-        <h1>Welcome, Therapist!</h1>
+    <!-- Chat Area -->
+    <div class="chat-container">
+        <h1>Chat with <span id="chat-header">Select a Patient</span></h1>
 
-        <section id="messages">
-            <h2>Messages</h2>
-            <div class="message-container">
-                <div class="message">
-                    <strong>Patient 1:</strong>
-                    <p>Hi, I have some questions about my treatment.</p>
-                </div>
-                <div class="message">
-                    <strong>Patient 2:</strong>
-                    <p>Can we reschedule our appointment?</p>
-                </div>
-                <div class="message">
-                    <strong>Patient 3:</strong>
-                    <p>Thank you for your help!</p>
-                </div>
+        <div class="message-container" id="messages">
+            <!-- Chat messages will appear here -->
+        </div>
+
+        <textarea placeholder="Type your message here..." id="message-input"></textarea>
+        <button id="send-button">Send Message</button>
+
+        <!-- Button to show pre-medical form -->
+        <button id="openFormButton">Pre-Medical Form</button>
+
+        <!-- Modal for Pre-Medical Form -->
+        <div id="preMedicalModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Pre-Medical Form</h2>
+                <form id="preMedicalForm">
+                    <label>Symptoms:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="symptoms" value="Anxiety" checked> Anxiety</label>
+                        <label><input type="checkbox" name="symptoms" value="Depression" checked> Depression</label>
+                        <label><input type="checkbox" name="symptoms" value="Stress"> Stress</label>
+                        <label><input type="checkbox" name="symptoms" value="Mood Swings"> Mood Swings</label>
+                        <label><input type="checkbox" name="symptoms" value="Sleep Issues"> Sleep Issues</label>
+                        <label><input type="checkbox" name="symptoms" value="Other"> Other</label>
+                    </div>
+
+                    <label for="age">Age:</label>
+                    <input type="text" id="age" name="age" value="25" required>
+
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="male">Male</option>
+                        <option value="female" selected>Female</option>
+                        <option value="non-binary">Non-binary</option>
+                        <option value="transgender">Transgender</option>
+                        <option value="genderqueer">Genderqueer</option>
+                        <option value="agender">Agender</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label>Have you ever been diagnosed with the following disorders?</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="disorders" value="Anxiety" checked> Anxiety</label>
+                        <label><input type="checkbox" name="disorders" value="Alcohol Use"> Alcohol Use</label>
+                        <label><input type="checkbox" name="disorders" value="ADHD"> ADHD</label>
+                        <label><input type="checkbox" name="disorders" value="ADD"> ADD</label>
+                        <label><input type="checkbox" name="disorders" value="Bipolar Disorder"> Bipolar Disorder</label>
+                        <label><input type="checkbox" name="disorders" value="Depression" checked> Depression</label>
+                        <label><input type="checkbox" name="disorders" value="Other"> Other</label>
+                    </div>
+
+                    <label for="medications">Current Medications:</label>
+                    <input type="text" id="medications" name="medications" value="None">
+
+                    <button type="button" onclick="downloadForm()">Download Form</button>
+                </form>
             </div>
-            <textarea placeholder="Type your message here..."></textarea>
-            <button>Send Message</button>
-        </section>
-
-        <section id="pre-medical-forms">
-            <h2>Pre-Medical Forms</h2>
-            <div class="form-container">
-                <h3>Patient Pre-Medical Form</h3>
-                <p><strong>Patient Name:</strong> John Doe</p>
-                <p><strong>Age:</strong> 30</p>
-                <p><strong>Medical History:</strong> No known allergies, previous surgery in 2015.</p>
-                <p><strong>Current Medications:</strong> None</p>
-                <button>Download Form</button>
-            </div>
-        </section>
+        </div>
     </div>
 
     <script>
-        // Function to send a message
-        function sendMessage() {
-            const messageInput = document.querySelector('textarea');
-            const messageContainer = document.querySelector('.message-container');
+        // Open the pre-medical form modal
+        document.getElementById('openFormButton').addEventListener('click', function() {
+            document.getElementById('preMedicalModal').style.display = 'block';
+        });
 
-            // Get the message text
-            const messageText = messageInput.value.trim();
-
-            // Check if the message is not empty
-            if (messageText) {
-                // Create a new message element
-                const newMessage = document.createElement('div');
-                newMessage.classList.add('message');
-                newMessage.innerHTML = `<strong>You:</strong> <p>${messageText}</p>`;
-
-                // Append the new message to the message container
-                messageContainer.appendChild(newMessage);
-
-                // Clear the input field
-                messageInput.value = '';
-
-                // Scroll to the bottom of the message container
-                messageContainer.scrollTop = messageContainer.scrollHeight;
-            } else {
-                alert("Please enter a message before sending.");
-            }
+        // Close the pre-medical form modal
+        function closeModal() {
+            document.getElementById('preMedicalModal').style.display = 'none';
         }
 
-        // Add event listener        // Add event listener to the send button
-        document.querySelector('button').addEventListener('click', sendMessage);
+        // Function to start chat with selected patient
+        function startChat(patientName) {
+            // Update the header to show the selected patient name
+            document.getElementById("chat-header").textContent = `Chat with ${patientName}`;
 
-        // Optional: Allow sending messages with the Enter key
-        document.querySelector('textarea').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault(); // Prevent new line
-                sendMessage(); // Call sendMessage function
+            // Clear previous messages
+            const messagesContainer = document.getElementById('messages');
+            messagesContainer.innerHTML = '';
+
+            // Display predefined messages for the selected patient
+            const messages = [
+                { sender: "Therapist", text: "Hello, how can I assist you today?" },
+                { sender: patientName, text: "I need some help with managing stress." }
+            ];
+
+            messages.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.innerHTML = `<strong>${message.sender}:</strong> <p>${message.text}</p>`;
+                messagesContainer.appendChild(messageElement);
+            });
+        }
+
+        // Send the message
+        document.getElementById('send-button').addEventListener('click', function() {
+            const messageText = document.getElementById('message-input').value;
+            if (messageText) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.innerHTML = `<strong>Therapist:</strong> <p>${messageText}</p>`;
+                document.getElementById('messages').appendChild(messageElement);
+                document.getElementById('message-input').value = ''; // Clear the input
             }
         });
+
+        // Function to download the pre-medical form as .docx
+        function downloadForm() {
+            const form = document.getElementById('preMedicalForm');
+            const formData = new FormData(form);
+            let docContent = "Pre-Medical Form\n\n";
+
+            formData.forEach((value, key) => {
+                docContent += `${key}: ${value}\n`;
+            });
+
+            const blob = new Blob([docContent], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'pre_medical_form.docx';
+            link.click();
+        }
     </script>
 </body>
 </html>

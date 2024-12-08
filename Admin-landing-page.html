@@ -18,56 +18,142 @@
         th {
             background-color: #f2f2f2;
         }
+        .logout-button {
+            margin: 20px 0;
+            padding: 10px 15px;
+            background-color: #f44336; /* Red color */
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .logout-button:hover {
+            background-color: #d32f2f; /* Darker red on hover */
+        }
+        .delete-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
     </style>
 </head>
 <body>
     <h1>Admin Dashboard</h1>
     
+    <a href="Login.html" class="logout-button">Logout</a>
+
     <h2>Admin Users</h2>
-    <table>
+    <table id="adminTable">
         <tr>
             <th>ID</th>
             <th>ID Number</th>
             <th>Password</th>
             <th>Created At</th>
+            <th>Action</th>
         </tr>
-        <?php if ($admin_result->num_rows > 0): ?>
-            <?php while($row = $admin_result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['id_number']; ?></td>
-                    <td><?php echo $row['password']; ?></td>
-                    <td><?php echo $row['created_at']; ?></td>
-                </tr>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <tr><td colspan="4">No admin users found.</td></tr>
-        <?php endif; ?>
+        <tr>
+            <td>1</td>
+            <td>admin01</td>
+            <td>admin123</td>
+            <td>2024-01-01</td>
+            <td><button class="delete-button" onclick="deleteRow(this)">Delete</button></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>admin02</td>
+            <td>admin456</td>
+            <td>2024-02-15</td>
+            <td><button class="delete-button" onclick="deleteRow(this)">Delete</button></td>
+        </tr>
     </table>
 
     <h2>Therapist Users</h2>
-    <table>
+    <table id="therapistTable">
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Contact Number</th>
             <th>Password</th>
             <th>Created At</th>
+            <th>Action</th>
         </tr>
-        <?php if ($therapist_result->num_rows > 0): ?>
-            <?php while($row = $therapist_result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['name']; ?></td>
-                    <td><?php echo $row['contact_number']; ?></td>
-                    <td><?php echo $row['password']; ?></td>
-                    <td><?php echo $row['created_at']; ?></td>
-                </tr>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <tr><td colspan="5">No therapists found.</td></tr>
-        <?php endif; ?>
+        <tr>
+            <td>1</td>
+            <td>Therapist 1</td>
+            <td>(555) 123-4567</td>
+            <td>therapist123</td>
+            <td>2024-03-01</td>
+            <td><button class="delete-button" onclick="deleteRow(this)">Delete</button></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Therapist 2</td>
+            <td>(555) 234-5678</td>
+            <td>therapist456</td>
+            <td>2024-03-05</td>
+            <td><button class="delete-button" onclick="deleteRow(this)">Delete</button></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Therapist 3</td>
+            <td>(555) 234-5899</td>
+            <td>therapist444</td>
+            <td>2024-03-06</td>
+            <td><button class="delete-button" onclick="deleteRow(this)">Delete</button></td>
+        </tr>
     </table>
 
+    <h2>Student Users</h2>
+    <table id="studentTable">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Contact Number</th>
+            <th>Password</th>
+            <th>Created At</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Student 1</td>
+            <td>(555) 345-6789</td>
+            <td>student123</td>
+            <td>2024-01-10</td>
+            <td><button class="delete-button" onclick="deleteRow(this)">Delete</button></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Student 2</td>
+            <td>(555) 456-7890</td>
+            <td>student456</td>
+            <td>2024-02-20</td>
+            <td><button class="delete-button" onclick="deleteRow(this)">Delete</button></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Student 3</td>
+            <td>(555) 567-8901</td>
+            <td>student789</td>
+            <td>2024-03-01</td>
+            <td><button class="delete-button" onclick="deleteRow(this)">Delete</button></td>
+        </tr>
+    </table>
+
+    <script>
+        // Function to delete a row from the table
+        function deleteRow(button) {
+            // Find the row containing the button
+            var row = button.parentElement.parentElement;
+            // Remove the row from the table
+            row.parentElement.removeChild(row);
+        }
+    </script>
 </body>
 </html>

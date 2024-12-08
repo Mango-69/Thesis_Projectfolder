@@ -6,7 +6,7 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "admin, student, therapist";
+$dbname = "Thesis_Projectfolder";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -18,40 +18,44 @@ if ($conn->connect_error) {
 // Get user type
 $user_type = $_POST['user-type'];
 
-// Handle registration logic based on user type
+// Prepare SQL statement based on user type
 if ($user_type === 'student') {
-    $email = $_POST['email'];
     $username = $_POST['username'];
-    $password = $_POST['password'];
-    $address = $_POST['address'];
-    $contact_no = $_POST['contact-no'];
-    $birthdate = $_POST['birthdate-year'] . '-' . $_POST['birthdate-month'] . '-' . $_POST['birthdate-day'];
-
-    $sql = "INSERT INTO Student_Login (username_email, password, created_at) VALUES ('$username', '$password', NOW())";
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    
+    $sql = "INSERT INTO Student_Login (username_email, password, created_at) VALUES (?, ?, NOW())";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $username, $password);
 
 } elseif ($user_type === 'admin') {
     $id_number = $_POST['id-number'];
-    $password = $_POST['admin-password'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO Admin_Login (id_number, password, created_at) VALUES ('$id_number', '$password', NOW())";
+    $sql = "INSERT INTO Admin_Login (id_number, password, created_at) VALUES (?, ?, NOW())";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $id_number, $password);
 
 } elseif ($user_type === 'therapist') {
     $name = $_POST['name'];
-    $contact_no = $_POST['contact-no'];
-    $password = $_POST['therapist-password'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO Therapist_Login (name, password, created_at) VALUES ('$name', '$password', NOW())";
+    $sql = "INSERT INTO Therapist_Login (name, password, created_at) VALUES (?, ?, NOW())";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $name, $password);
 }
 
 // Execute query and handle errors
-if ($conn->query($sql) === TRUE) {
+if (isset($stmt) && $stmt->execute()) {
     // Redirect to Main-page.html upon successful registration
     header("Location: ../Main-page.html");
     exit;
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $conn->error;
 }
 
-// Close the database connection
+// Close the statement and database connection
+if (isset($stmt)) {
+    $stmt->close();
+}
 $conn->close();
 ?>

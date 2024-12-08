@@ -72,36 +72,20 @@
         <div class="therapist-container">
             <div class="therapist">
                 <span>Therapist 1</span>
-                <button onclick="startChat('Therapist 1')">Chat</button>
+                <a href="Messeges.html"><button class="chat-button">Chat</button></a>
             </div>
             <div class="therapist">
                 <span>Therapist 2</span>
-                <button onclick="startChat('Therapist 2')">Chat</button>
+                <a href="Messeges.html"><button class="chat-button">Chat</button></a>
             </div>
             <div class="therapist">
                 <span>Therapist 3</span>
-                <button onclick="startChat('Therapist 3')">Chat</button>
+                <a href="Messeges.html"><button class="chat-button">Chat</button></a>
             </div>
         </div>
     </section>
 
     <a href="Student-landing-page.html" class="back-button">Back to home</a>
 
-    <script>
-
-        // Function to handle starting a chat with a selected therapist
-        function startChat(therapistName) {
-            
-// In Messages.html, add this code to handle the therapist's name
-const urlParams = new URLSearchParams(window.location.search);
-const therapistName = urlParams.get('therapist');
-
-if (therapistName) {
-    const chatHeader = document.querySelector('.chat-header h2'); 
-    chatHeader.textContent = `Chat with ${decodeURIComponent(therapistName)}`;
-}
-``
-        }
-    </script>
 </body>
 </html>
