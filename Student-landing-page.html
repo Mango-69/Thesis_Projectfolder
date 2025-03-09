@@ -7,11 +7,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="css/Landing-page.css">
   <style>
-    /* Add any additional styles here */
+    /* Add your CSS here (we will also add the updated CSS below) */
   </style>
 </head>
-
 <body>
+  <!-- Sidebar -->
   <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="Student-landing-page.html" onclick="stayOpen()">
@@ -44,8 +44,18 @@
     </div>
   </div>
 
+  <!-- Main Content -->
   <div id="main">
     <button class="openbtn" id="sidebarButton" onclick="openNav()">&#9776;</button>
+
+    <!-- About Section -->
+    <div class="content-container" id="about">
+      <h1>About</h1>
+      <p>Welcome to EduVital! Our mission is to provide a comprehensive mental health and wellness platform specifically designed for students. We understand the pressures of academia, and we're here to help you manage your mental health so that you can thrive both in school and in life.</p>
+      <p>We are committed to helping students achieve better mental well-being, stronger emotional resilience, and a balanced approach to academics and life.</p>
+    </div>
+
+    <!-- Home Section -->
     <div class="content-container">
       <h1>Home</h1>
       <p>Welcome to the home page!</p>
@@ -101,31 +111,44 @@
   </div>
 
   <script>
-    function openNav() {
-      document.getElementById("mySidebar").style.left = "0";
-      document.getElementById("main").style.marginLeft = "250px"; // Adjust this to match sidebar width
-      document.getElementById("sidebarButton").classList.add("hidden");
-    }
-
-    function closeNav() {
-      document.getElementById("mySidebar").style.left = "-250px"; // Hide sidebar
-      document.getElementById("main").style.marginLeft = "0"; // Reset margin
-      document.getElementById("sidebarButton").classList.remove("hidden");
-    }
-
     function toggleTheme() {
-      const currentTheme = localStorage.getItem('theme') || 'light';
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      localStorage.setItem('theme', newTheme);
-      document.documentElement.setAttribute('data-theme', newTheme);
-      document.getElementById('checkbox').checked = newTheme === 'dark'; // Update toggle state
+      const checkbox = document.getElementById('checkbox');
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      
+      if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        checkbox.checked = false; // Uncheck the toggle
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        checkbox.checked = true; // Check the toggle
+      }
     }
 
     // On page load, check for saved theme preference
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.getElementById('checkbox').checked = savedTheme === 'dark'; // Set the toggle state
-  </script>
 
+    // Close the sidebar when the page loads
+    window.onload = function() {
+      closeNav();
+    };
+
+    // Open sidebar function (doesn't affect main content)
+    function openNav() {
+      document.getElementById("mySidebar").style.left = "0"; // Move the sidebar into view
+      document.getElementById("sidebarButton").classList.add("hidden"); // Hide the button
+      document.getElementById("main").style.paddingLeft = "250px"; // Add padding to the main content when sidebar opens
+    }
+
+    // Close sidebar function (restore main content padding)
+    function closeNav() {
+      document.getElementById("mySidebar").style.left = "-250px"; // Hide sidebar
+      document.getElementById("sidebarButton").classList.remove("hidden"); // Show the button
+      document.getElementById("main").style.paddingLeft = "0"; // Reset padding when sidebar closes
+    }
+  </script>
 </body>
 </html>
